@@ -1,0 +1,574 @@
+<lab-header></lab-header>
+
+<!-- Created by JoshOY on 2015/8/1 -->
+<link href="styles/formalproject.css" rel="stylesheet" type="text/css" />
+
+
+<div class="container page-formal-project">
+
+  <div class="row">
+    <div class="col-md-12">
+      <!-- banner -->
+      <div class="l-banner">
+        <div class="l-banner--info">
+          <div class="box-company-logo">
+            <img src="{{status.projectLogoUrl}}"/>
+          </div>
+          <div class="box-company-brief">
+            <h1>{{status.projectName}} &nbsp;&nbsp; <span class="company-name-notation">{{status.projectStartTime || '载入中...' | date:'yyyy年MM月'}}&nbsp;|&nbsp;{{status.projectStartCity}}</span></h1>
+            <h3>{{status.projectIntroduction}}</h3>
+            <p>
+              <span class="glyphicon glyphicon-tags"></span>
+              <span id="tags">{{showProjectTags()}}</span>
+            </p>
+          </div>
+        </div>
+        <div class="l-banner--selections">
+          <a href="" id="id-selection-overview" class="is-current-selection">项目总览</a>
+          <a href="" id="id-selection-data" class="">项目数据</a>
+          <a href="" id="id-selection-evaluate" class="">项目评估</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="l-blank"></div>
+
+  <div class="row ">
+    <div class="col-md-8">
+      <div class="row">
+        <!-- 股权变更信息 -->
+        <div class="row section-1">
+          <div class="col-md-12">
+            <div class="l-ownership-info">
+              <div class="l-info-nav">
+                <div class="l-info-nav--description">股权变更信息</div>
+                <button class="l-info-nav--add"  data-toggle="modal" data-target="#id-modal--add-share-changes-step1"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加</button>
+              </div>
+              <div>
+                <table class="table table-striped table-hover ">
+                  <thead>
+                    <tr class="info">
+                      <th>投资方</th>
+                      <th>投资时间</th>
+                      <th>投资类型</th>
+                      <th>投资币种</th>
+                      <th>投资金额</th>
+                      <th>投后估值</th>
+                      <th>占股比例</th>
+                      <th>董事会相关</th>
+                      <th>文档/操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!--<tr>-->
+                      <!--<td>经纬中国</td>-->
+                      <!--<td>2015-06</td>-->
+                      <!--<td>原始股东</td>-->
+                      <!--<td>人民币</td>-->
+                      <!--<td>5,000,000</td>-->
+                      <!--<td>12,000,000</td>-->
+                      <!--<td>20%</td>-->
+                      <!--<td>无</td>-->
+                      <!--<td><a href="">查看</a></td>-->
+                    <!--</tr>-->
+                    <tr ng-repeat="row in status.equityInfoList">
+                      <td>{{row.investor}}</td>
+                      <td>{{timeStampToDate(row.investTime)}}</td>
+                      <td>{{investTypeMap[row.investType]}}</td>
+                      <td>{{row.investCurrency}}</td>
+                      <td>{{row.investAmount}}</td>
+                      <td>{{row.estimateAmount}}</td>
+                      <td>{{row.sharePercentage}}</td>
+                      <td>{{row.board}}</td>
+                      <td><a href="" data-toggle="modal" data-target="#id-modal--add-share-changes-step2"
+                             ng-click="changeCurrentViewingEquityId(eid)"
+                             ng-init="eid = row.id;"> 查看 </a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="l-blank section-1"></div>
+
+        <!-- 项目进展 -->
+        <div class="row section-1">
+          <div class="col-md-12">
+
+            <div class="l-progress-info">
+              <div class="l-info-nav">
+                <div class="l-info-nav--description">项目进展</div>
+                <button class="l-info-nav--add" data-toggle="modal" data-target="#id-modal--add-progress-info"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加</button>
+              </div>
+
+              <div class="l-progress-info--content">
+                <h4 ng-show="!(status.progressInfoLoaded)" style="text-align: center">信息载入中...</h4>
+                <ul>
+                  <!--
+                  <li class="progress-info progress-type-spread">
+                    <div class="progress-info--time">
+                      <span>2015-06-25</span>
+                      <div class="progress-info--operations"><a href="">编辑</a>&nbsp;&nbsp;<a href="">删除</a></div>
+                    </div>
+                    <div class="progress-info--text">今天我们上了颠覆性的一个版本啊2.0.0.0.0.0啊啊啊啊!!!好牛逼的功能,别人都没有!</div>
+                  </li>
+                  <li class="progress-info progress-type-update">
+                    <div class="progress-info--time"><span>2015-06-25</span></div>
+                    <div class="progress-info--text">今天我们上了颠覆性的一个版本啊2.0.0.0.0.0啊啊啊啊!!!好牛逼的功能,别人都没有!</div>
+                  </li>
+                  <li class="progress-info progress-type-media">
+                    <div class="progress-info--time"><span>2015-06-25</span></div>
+                    <div class="progress-info--text">今天我们上了颠覆性的一个版本啊2.0.0.0.0.0啊啊啊啊!!!好牛逼的功能,别人都没有!</div>
+                  </li>
+                  <li class="progress-info progress-type-financing">
+                    <div class="progress-info--time"><span>2015-06-25</span></div>
+                    <div class="progress-info--text">今天我们上了颠覆性的一个版本啊2.0.0.0.0.0啊啊啊啊!!!好牛逼的功能,别人都没有!</div>
+                  </li>
+                  <li class="progress-info progress-type-cooperation">
+                    <div class="progress-info--time"><span>2015-06-25</span></div>
+                    <div class="progress-info--text">今天我们上了颠覆性的一个版本啊2.0.0.0.0.0啊啊啊啊!!!好牛逼的功能,别人都没有!</div>
+                  </li>
+                  <li class="progress-info progress-type-awarding">
+                    <div class="progress-info--time"><span>2015-06-25</span></div>
+                    <div class="progress-info--text">今天我们上了颠覆性的一个版本啊2.0.0.0.0.0啊啊啊啊!!!好牛逼的功能,别人都没有!</div>
+                  </li>
+                  -->
+
+                  <li ng-repeat="info in status.progressInfoList" class="{{'progress-info ' + eventTypeMap[info.eventType].className}}">
+                    <div class="progress-info--time"><span>2015-06-25</span></div>
+                    <div class="progress-info--text">{{info.description}}</div>
+              </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="l-blank section-1"></div>
+
+        <!-- 运营数据 -->
+        <div class="row section-2">
+          <div class="col-md-12">
+
+            <div class="l-operational-data">
+              <div class="l-info-nav">
+                <div class="l-info-nav--description">运营数据</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="l-blank section-2"></div>
+
+        <!-- 项目评估 -->
+        <div class="row section-3">
+          <div class="col-md-12">
+
+            <div class="l-project-evaluate">
+              <div class="l-info-nav">
+                <div class="l-info-nav--description">项目评估</div>
+                <button class="l-info-nav--add"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加</button>
+              </div>
+
+              <!--<div class="l-project-evaluate&#45;&#45;item">
+                <div class="evaluator-info">
+                  <img src="../images/JoshOY_Avatar.png" />
+                  <span class="evaluator-info&#45;&#45;name"><a href="">项目经理A</a></span>
+                  <span class="evaluator-info&#45;&#45;time notation">2015-06-25 14:25</span>
+                  &lt;!&ndash;<span class="progress-info&#45;&#45;operations"><a href="">编辑</a>&nbsp;&nbsp;<a href="">删除</a></span>&ndash;&gt;
+                </div>
+                <div class="l-clear"></div>
+                <div class="evaluation-content">
+                  <p>商业模式和切入点都很有趣! 看好优点这个app!</p>
+                </div>
+              </div>-->
+
+              <div ng-repeat="item in status.evaluationList" class="l-project-evaluate--item">
+                <div class="evaluator-info">
+                  <img src="../images/JoshOY_Avatar.png" />
+                  <span class="evaluator-info--name"><a href="">{{item.managerName}}</a></span>
+                  <span class="evaluator-info--time notation">{{item.time}}</span>
+                </div>
+                <div class="l-clear"></div>
+                <div class="evaluation-content">
+                  <p>{{item.content}}</p>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="l-blank section-3"></div>
+
+      </div>
+    </div>
+
+    <!-- 右侧边栏 -->
+    <div class="col-md-4">
+      <div class="l-right-box">
+        <div class="l-right-box-item">
+          <h1>附件</h1>
+          <ol>
+            <li>商业计划书.ppt</li>
+            <li>路演.ppt</li>
+          </ol>
+        </div>
+        <div class="l-right-box-item">
+          <h1>
+            核心创始人
+            <span class="founder-add-btn" data-toggle="modal" data-target="#id-modal--add-founder">
+              <i class="glyphicon glyphicon-plus"></i>&nbsp;添加
+            </span>
+          </h1>
+          <ol>
+            <!--<li>-->
+              <!--<span>创始人A姓名</span>-->
+              <!--<br>-->
+              <!--<span class="notation">现有职位名称A</span>-->
+            <!--</li>-->
+            <!--<li>-->
+              <!--<span>创始人B姓名</span>-->
+              <!--<br>-->
+              <!--<span class="notation">现有职位名称B</span>-->
+            <!--</li>-->
+            <!--<li>-->
+              <!--<span>创始人C姓名</span>-->
+              <!--<br>-->
+              <!--<span class="notation">现有职位名称C</span>-->
+            <!--</li>-->
+            <li ng-repeat="founder in status.founderList">
+              <span>{{founder.name}}</span>
+              <br />
+              <span class="notation">{{founder.position}}</span>
+            </li>
+          </ol>
+        </div>
+        <div class="l-right-box-item l-right-box-item--no-border">
+          <h1>公司基本信息</h1>
+          <ul>
+            <li>
+              <span class="l-right-box-item--key">公司名称</span>
+              <span class="l-right-box-item--value">xxxxx</span>
+            </li>
+            <li>
+              <span class="l-right-box-item--key">公司注册类型</span>
+              <span class="l-right-box-item--value">xxxxx</span>
+            </li>
+            <li>
+              <span class="l-right-box-item--key">注册地址</span>
+              <span class="l-right-box-item--value">xxxxx</span>
+            </li>
+            <li>
+              <span class="l-right-box-item--key">注册时间</span>
+              <span class="l-right-box-item--value">xxxxx</span>
+            </li>
+            <li>
+              <span class="l-right-box-item--key">注册资本(元)</span>
+              <span class="l-right-box-item--value">xxxxx</span>
+            </li>
+            <li>
+              <span class="l-right-box-item--key">法定代表人</span>
+              <span class="l-right-box-item--value">xxxxx</span>
+            </li>
+            <li>
+              <span class="l-right-box-item--key">法定代表人手机号码</span>
+              <span class="l-right-box-item--value">xxxxx</span>
+            </li>
+            <li>
+              <span class="l-right-box-item--key">法定代表人电子邮箱</span>
+              <span class="l-right-box-item--value">xxxxx</span>
+            </li>
+            <li>
+              <span class="l-right-box-item--key">办公地址</span>
+              <span class="l-right-box-item--value">xxxxx</span>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+
+  <!-- 添加项目进展模态框 -->
+  <div class="modal fade" id="id-modal--add-progress-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">添加项目进展</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <label class="notation" for="id-modal--add-progress-info--type">事件类别</label>
+            <select id="id-modal--add-progress-info--type" class="form-control"
+              ng-model="status.newProgressModel.type" ng-options="progressInfoMap[type] for type in progressType">
+              <!--<option>用户推广</option>-->
+              <!--<option>版本更新</option>-->
+              <!--<option>媒体报道</option>-->
+              <!--<option>融资洽谈</option>-->
+              <!--<option>业务合作</option>-->
+              <!--<option>比赛获奖</option>-->
+            </select>
+            <br />
+            <label class="notation" for="id-modal--add-progress-info--description">事件描述</label>
+            <textarea class="form-control" id="id-modal--add-progress-info--description"
+                      placeholder="请输入..." ng-model="status.newProgressModel.content"></textarea>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="id-modal--add-progress-info--commit"
+                  data-dismiss="modal" ng-click="addProgressInfo()">提交</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 添加项目股权信息 -->
+  <div class="modal fade" id="id-modal--add-share-changes-step1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">添加股权信息</h4>
+          <div class="add-share-changes--steps-box">
+            <div class="add-share-changes--step">1</div>
+            <div class="add-share-changes--step is-not-current-step">2</div>
+          </div>
+        </div>
+        <div class="modal-body">
+
+          <label class="notation" for="id-modal--add-share-changes--depositor-name">投资人/机构</label>
+          <input type="text" placeholder="请输入" class="form-control"
+                 id="id-modal--add-share-changes--depositor-name"
+                 ng-model="status.equityModel.investor" >
+          <br />
+
+          <label class="notation">注册时间</label>
+          <select class="form-control" id="id-modal--add-share-changes--time-year"
+                  ng-model="status.equityModel.year"
+                  ng-options="yearMap[y] for y in yearList">
+          </select>
+          <select class="form-control" id="id-modal--add-share-changes--time-month"
+                  ng-model="status.equityModel.month"
+                  ng-options="monthMap[m] for m in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
+          </select>
+          <br />
+
+          <label class="notation" for="id-modal--add-share-changes--investment-type">投资类型</label>
+          <select class="form-control" id="id-modal--add-share-changes--investment-type"
+            ng-model="status.equityModel.investType" ng-options="type for type in investType">
+          </select>
+          <br />
+
+          <label class="notation" for="id-modal--add-share-changes--investment-currency">投资币种</label>
+          <select class="form-control" id="id-modal--add-share-changes--investment-currency"
+                  ng-model="status.equityModel.investCurrency"
+                  ng-options="currency for currency in investCurrencyList">
+          </select>
+          <br />
+
+          <label class="notation" for="id-modal--add-share-changes--investment-money">投资金额</label>
+          <input type="text" class="form-control"
+                 ng-model="status.equityModel.investAmount"
+                 id="id-modal--add-share-changes--investment-money"
+                 placeholder="请输入数字..." />
+          <br />
+
+          <label class="notation" for="id-modal--add-share-changes--after-valuation">投后估值</label>
+          <input type="text" class="form-control" id="id-modal--add-share-changes--after-valuation"
+                 ng-model="status.equityModel.estimateAmount"
+                 placeholder="请输入数字..." />
+          <br />
+
+          <label class="notation" for="id-modal--add-share-changes--shares-proportion">占股比例</label>
+          <input type="text" class="form-control" id="id-modal--add-share-changes--shares-proportion"
+                 ng-model="status.equityModel.sharePercentage"
+                 placeholder="请输入..." />
+          <br />
+
+          <label class="notation" for="id-modal--add-share-changes--board-related">董事会相关</label>
+          <input type="text" class="form-control" id="id-modal--add-share-changes--board-related"
+                 ng-model="status.equityModel.board"
+                 placeholder="请输入董事会人员相关变更信息..." />
+          <br />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"
+                  data-dismiss="modal" ng-click="addEquityInfo()"
+                  data-toggle="modal" data-target="#id-modal--add-share-changes-step2">创建股权信息并进入下一步</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="id-modal--add-share-changes-step2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">股权信息附件</h4>
+          <!--<div class="add-share-changes&#45;&#45;steps-box">-->
+            <!--<div class="add-share-changes&#45;&#45;step is-not-current-step">1</div>-->
+            <!--<div class="add-share-changes&#45;&#45;step">2</div>-->
+          <!--</div>-->
+        </div>
+        <div class="modal-body">
+          <div>
+            <ul>
+              <li>
+                <span>工商营业执照</span>
+                <span><a href="">印业执照.pdf</a></span>
+                <span><button>上传</button></span>
+              </li>
+              <li>
+                <span>组织机构代码证</span>
+                <span><a href="">组织机构代码证.pdf</a></span>
+                <span><button>上传</button></span>
+              </li>
+              <li>
+                <span>税务登记证</span>
+                <span><a href="">税务登记证.pdf</a></span>
+                <span><button>上传</button></span>
+              </li>
+              <li>
+                <span>工商章程</span>
+                <span><a href="">工商章程.pdf</a></span>
+                <span><button>上传</button></span>
+              </li>
+              <li>
+                <span>股东会决议</span>
+                <span><a href="">股东会决议.pdf</a></span>
+                <span><button>上传</button></span>
+              </li>
+              <li>
+                <span>工商营业执照</span>
+                <span><a href="">印业执照.pdf</a></span>
+                <span><button>上传</button></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">完成</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">删除该条信息</button>
+          <!--<button type="button" class="btn btn-default" data-dismiss="modal"-->
+          <!--data-toggle="modal" data-target="#id-modal&#45;&#45;add-share-changes-step1">返回上一步</button>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 添加项目创始人 -->
+  <div class="modal fade" id="id-modal--add-founder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">添加核心创始人</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="id--form--add-founder--name">创始人姓名</label>
+              <input type="text" class="form-control" id="id--form--add-founder--name"
+                     ng-model="status.newFounderModel.name">
+            </div>
+            <div class="form-group">
+              <label for="id--form--add-founder--phone">手机号</label>
+              <input type="text" class="form-control" id="id--form--add-founder--phone"
+                     ng-model="status.newFounderModel.mobile">
+            </div>
+            <div class="form-group">
+              <label for="id--form--add-founder--wechat">微信号</label>
+              <input type="text" class="form-control" id="id--form--add-founder--wechat"
+                     ng-model="status.newFounderModel.wechat">
+            </div>
+            <div class="form-group">
+              <label for="id--form--add-founder--mail">电子邮箱</label>
+              <input type="text" class="form-control" id="id--form--add-founder--mail"
+                     ng-model="status.newFounderModel.email">
+            </div>
+            <div class="form-group">
+              <label for="id--form--add-founder--identityNumber">身份证/护照号码</label>
+              <input type="text" class="form-control" id="id--form--add-founder--identityNumber"
+                ng-model="status.newFounderModel.idNumber">
+            </div>
+            <div class="form-group">
+              <label for="id--form--add-founder--job">目前职位</label>
+              <input type="text" class="form-control" id="id--form--add-founder--job"
+                ng-model="status.newFounderModel.position">
+            </div>
+            <div><span>*工作经历, 教育信息请在添加之后完善.</span></div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"
+                  data-dismiss="modal" ng-click="addFounder()">提交添加</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+<script>
+$(document).ready(function() {
+
+  $('.section-2').addClass('is-hidden');
+  $('.section-3').addClass('is-hidden');
+
+  /* 选择栏 */
+  $('#id-selection-overview').click(function(){
+    if (!$(this).hasClass('is-current-selection')) {
+      $('#id-selection-overview').addClass('is-current-selection');
+      $('#id-selection-data').hasClass('is-current-selection') ? $('#id-selection-data').removeClass('is-current-selection') : null;
+      $('#id-selection-evaluate').hasClass('is-current-selection') ? $('#id-selection-evaluate').removeClass('is-current-selection') : null;
+
+      $('.section-1').removeClass('is-hidden');
+      $('.section-2').addClass('is-hidden');
+      $('.section-3').addClass('is-hidden');
+    }
+  });
+
+  $('#id-selection-data').click(function(){
+    if (!$(this).hasClass('is-current-selection')) {
+      $('#id-selection-overview').hasClass('is-current-selection') ? $('#id-selection-overview').removeClass('is-current-selection') : null;;
+      $('#id-selection-data').addClass('is-current-selection');
+      $('#id-selection-evaluate').hasClass('is-current-selection') ? $('#id-selection-evaluate').removeClass('is-current-selection') : null;
+
+      $('.section-1').addClass('is-hidden');
+      $('.section-2').removeClass('is-hidden');
+      $('.section-3').addClass('is-hidden');
+    }
+  });
+
+  $('#id-selection-evaluate').click(function(){
+    if (!$(this).hasClass('is-current-selection')) {
+      $('#id-selection-overview').hasClass('is-current-selection') ? $('#id-selection-overview').removeClass('is-current-selection') : null;
+      $('#id-selection-data').hasClass('is-current-selection') ? $('#id-selection-data').removeClass('is-current-selection') : null;
+      $('#id-selection-evaluate').addClass('is-current-selection');
+
+      $('.section-1').addClass('is-hidden');
+      $('.section-2').addClass('is-hidden');
+      $('.section-3').removeClass('is-hidden');
+    }
+  });
+
+})
+</script>

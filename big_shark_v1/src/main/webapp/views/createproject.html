@@ -1,0 +1,258 @@
+<lab-header></lab-header>
+
+<link type="text/css" rel="stylesheet" href="../bower_components/selectize/dist/css/selectize.default.css" />
+
+<style type="text/css">
+  .inner-container{
+    margin: 30px 0;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  }
+  .inner-container .intro-words{
+    padding: 38px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .inner-container .intro-words strong{
+    color: #f86f00;
+    font-size: 30px;
+    line-height: 42px;
+    margin-bottom: 10px;
+  }
+  .inner-container .intro-words p{
+    font-size: 16px;
+    line-height: 28px;
+    color: #6d6d6d;
+  }
+  .intro-form{
+    margin: 30px 0;
+  }
+  .upload-btn-group{
+    margin-top: 20px;
+  }
+
+  /* Edited by JoshOY */
+
+  .intro-words {
+    padding-left: 25px !important;
+  }
+
+  .intro-words strong {
+    color: #222!important;
+    font-size: 2.4em!important;
+  }
+
+  .intro-words p {
+    line-height: 55px;
+  }
+
+  .label-control {
+    color: #555;
+    height: 34px;
+    /*line-height: 34px;*/
+    font-size: 1.04em;
+    width: 16%;
+    padding-left: 40px;
+    overflow: visible;
+  }
+
+  .form-control {
+    width: 70% !important;
+    margin-left: 25px !important;
+  }
+
+  .input-group .form-control {
+    margin-left: 40px !important;
+    width: 55.5% !important;
+  }
+
+  .help-block {
+    margin-left: 25px;
+  }
+
+  span.input-group-btn {
+    float: left;
+    margin-left: 25px;
+  }
+
+  .btn-bigshark-default {
+    float: left;
+    border: #337ab7 1px solid;
+    color: #337ab7;
+    /*border-radius: 4px !important;*/
+  }
+
+  select.form-control {
+    width: 150px !important;
+    float: left;
+  }
+
+  .select-description {
+    float: left;
+    font-size: 1.05em;
+    line-height: 34px;
+    margin-left: 15px;
+    margin-right: 5px;
+  }
+
+  .btn-save-changes {
+    margin-left: 15px;
+  }
+
+  .table-add-attachment {
+    margin-top: 15px;
+  }
+
+  .table-add-attachment-elem {
+    line-height: 51px!important;
+  }
+
+  .table-add-attachment-elem > td {
+    line-height: 51px!important;
+  }
+
+  .selectize-input {
+    width: 70% !important;
+    margin-left: 25px !important;
+
+  }
+</style>
+<div class="container">
+  <div class="inner-container">
+    <div class="intro-words">
+      <strong>创建我的项目</strong>
+      <p>填写融资项目的基本信息</p>
+    </div>
+    <form ng-submit="">
+      <div class="form-horizontal intro-form">
+        <div class="form-group">
+          <label for="input1" class="col-sm-2 label-control"><span class="required">* </span>项目名称</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input1" placeholder="" ng-model="form.name" ng-blur="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input2" class="col-sm-2 label-control"><span class="required">* </span>项目负责人姓名</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input2" placeholder="" ng-model="form.contact_name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input3" class="col-sm-2 label-control">联系邮箱</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input3" placeholder="" ng-model="form.contact_email">
+            <p class="help-block"><span class="required">* </span>请确保邮箱正确，项目进度会以邮件形式通知</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input4" class="col-sm-2 label-control">常用手机号码</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input4" placeholder="" ng-model="form.contact_phone">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input5" class="col-sm-2 label-control">手机验证码</label>
+          <div class="col-sm-10 input-group">
+            <input type="text" class="form-control" id="input5" placeholder="" ng-model="form.verification_code">
+            <span class="input-group-btn">
+              <button class="btn btn-default btn-bigshark-default" type="button" ng-click="sendCaptcha()">获取验证码</button>
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 label-control">项目开始时间</label>
+          <div class="col-sm-10">
+            <select class="form-control" ng-model="form.year" ng-options="y for y in years">
+            </select>
+            <span class="select-description">年</span>
+            <select class="form-control" ng-model="form.month" ng-options="m for m in months">
+            </select>
+            <span class="select-description">月</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 label-control">核心团队所在城市</label>
+          <div class="col-sm-10">
+            <select class="form-control" ng-model="form.city" ng-options="city for city in cities">
+              <option value="">请选择</option>
+            </select>
+            <p class="help-block"><span class="required">* </span>目前仅支持三个城市</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 label-control">项目类型</label>
+          <div class="col-sm-10">
+            <!--<select class="form-control" ng-model="form.type" ng-options="type for type in cities">-->
+              <!--<option value="">请选择</option>-->
+            <!--</select>-->
+            <!--<select class="form-control" ng-model="project.type" id="select-project-types"></select>-->
+            <selectize id="select-project-types" ng-model="form.type" options="['']" config="selectizeConfig"></selectize>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 label-control">一句话描述</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="长度不超过100个字" ng-model="form.description">
+          </div>
+        </div>
+
+        <div class="form-group table-add-attachment">
+          <div class="col-sm-offset-2 col-sm-10">
+            <blockquote>
+              <p>
+                <strong>上传附件！</strong>
+                请先创建项目,项目创建之后可以上传多个附件。
+              </p>
+            </blockquote>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <a href="" class="btn btn-default btn-bigshark-default" ng-click="submitBtnClicked ? null : register(form)">创建项目</a>
+          </div>
+        </div>
+
+        <!--<div class="form-group">-->
+          <!--<div class="col-sm-offset-2 col-sm-10">-->
+            <!--<a href="" class="btn btn-default btn-bigshark-default" ng-click="checkObject()">查看项目的object</a>-->
+          <!--</div>-->
+        <!--</div>-->
+
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../bower_components/selectize/dist/js/standalone/selectize.min.js"></script>
+<script src="../bower_components/angular-selectize2/dist/selectize.js"></script>
+
+
+<script>
+//  $(document).ready(function() {
+//    $('#select-project-types').selectize({
+//      allowEmptyOption: true,
+//      create: true,
+//      maxItems: 3,
+//      plugins: ['remove_button'],
+//      delimiter: ',',
+//      persist: false
+//    });
+//  });
+//  $(document).ready(function(){
+//    $(function() {
+//      $('#select-project-types').selectize({
+//        create: true,
+//        maxItems: 3,
+//        valueField: 'id',
+//        labelField: 'title',
+//        delimiter: '|',
+//        placeholder: 'Pick something',
+//        onInitialize: function(selectize){
+//          // receives the selectize object as an argument
+//        }
+//      });
+//    });
+//  });
+</script>

@@ -1,0 +1,452 @@
+<style>
+  .float-right {
+    float: right;
+  }
+
+  .clear {
+    clear: both;
+    min-height: 5px;
+  }
+
+  .inner-container {
+    margin: 10px 0;
+    padding: 5px 75px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  }
+
+  .project-title {
+
+  }
+
+  .section-title {
+    font-size: 1.25em;
+    padding-bottom: 25px;
+  }
+
+  .project-info {
+    height: 35px;
+    line-height: 35px;
+  }
+
+  .item-key {
+    display: inline-block;
+    text-align: right;
+    width: 120px;
+    color: #999;
+  }
+
+  .item-value {
+    display: inline-block;
+    text-align: left;
+    width: 450px;
+    margin-left: 55px;
+  }
+
+  .btn-normalize {
+    width: 100px;
+  }
+
+  .remark-info-container {
+    min-height: 80px;
+  }
+
+  .remark-info {
+    width: 100%;
+    min-height: 80px;
+    border-top: #eee 1px solid;
+    padding-top: 10px;
+  }
+
+  .remark-info--yes-box {
+    display: inline-block;
+    width: 115px;
+    padding-left: 5px;
+  }
+
+  .remark-info--yes {
+    display: inline-block;
+    color: #fff;
+    background: limegreen;
+    width: 35px;
+    margin-left: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .remark-info--content {
+    margin-top: 10px;
+  }
+
+  .final-remark-info-container {
+    min-height: 160px;
+  }
+
+  .final-remark-info--evaluate {
+    width: 70%;
+    min-height: 80px;
+    border: #ddd 1px solid;
+    margin-bottom: 10px;
+  }
+
+</style>
+
+<lab-header></lab-header>
+
+<div class="page-review-detail">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+
+
+        <div class="inner-container">
+
+          <div class="row">
+            <h3 class="project-title">{{projectTitle}}</h3>
+            <p class="project-status">{{projectStatusMap[status]}}</p>
+          </div>
+
+          <section>
+            <div class="row project-info">
+              <h4 class="section-title">基本信息</h4>
+            </div>
+
+            <div class="row project-info">
+              <span class="item-key">项目名称</span>
+              <span class="item-value">{{projectTitle}}</span>
+            </div>
+
+            <div class="row project-info">
+              <span class="item-key">项目开始时间</span>
+              <span class="item-value">{{startTimeYear}}年{{startTimeMonth}}月</span>
+            </div>
+
+            <div class="row project-info">
+              <span class="item-key">核心团队所在城市</span>
+              <span class="item-value">{{projectCity}}</span>
+            </div>
+
+            <div class="row project-info">
+              <span class="item-key">项目类型</span>
+              <span class="item-value">{{projectType}}</span>
+            </div>
+
+            <div class="row project-info">
+              <span class="item-key">项目简介</span>
+              <span class="item-value">{{projectDescription}}</span>
+            </div>
+
+            <div class="row project-info">
+              <span class="item-key">项目附件</span>
+              <span class="item-value">
+                <span ng-repeat="attachment in projectAttachments">
+                  <button class="btn btn-default" ng-click="">{{attachment.name}}</button>
+                </span>
+              </span>
+            </div>
+          </section>
+
+          <section>
+            <div class="row project-info">
+              <h4 class="section-title">项目负责人信息</h4>
+            </div>
+
+            <div class="row project-info">
+              <span class="item-key">姓名</span>
+              <span class="item-value">{{contactName}}</span>
+            </div>
+
+            <div class="row project-info">
+              <span class="item-key">电子邮箱</span>
+              <span class="item-value">{{contactEmail}}</span>
+            </div>
+
+            <div class="row project-info">
+              <span class="item-key">手机号码</span>
+              <span class="item-value">{{contactPhone}}</span>
+            </div>
+          </section>
+
+          <section ng-show="status === 'AUDITION'">
+            <div class="row project-info">
+              <h4 class="section-title">点赞</h4>
+            </div>
+
+            <div class="row project-info">
+              <span class="item-key">操作</span>
+              <span class="item-value">
+                <button class="btn btn-success btn-normalize" ng-click="likeThisProject()"><i class="glyphicon glyphicon-thumbs-up"></i> 赞!</button>
+                <button class="btn btn-warning btn-normalize">待观察</button>
+                <button class="btn btn-danger  btn-normalize">不再关注</button>
+              </span>
+            </div>
+
+            <div class="row project-info">
+              <span class="item-key">点赞的有</span>
+              <span class="item-value">
+                <span ng-repeat="manager in likeManagerList">
+                  <a href="#" ng-click="">{{manager.managerName}}</a>&nbsp;&nbsp;
+                </span>
+                <span ng-show="likeManagerList.length === 0">暂时还没有人点赞...</span>
+              </span>
+            </div>
+
+          </section>
+
+          <section ng-show="status === 'FIRST_REVIEW'">
+            <div class="row project-info">
+              <h4 class="section-title">初审操作</h4>
+            </div>
+
+            <div class="row project-info">
+              <span class="item-key">操作</span>
+              <span class="item-value">
+                <button class="btn btn-success btn-normalize" data-toggle="modal"
+                        data-target="#id-modal-confirm-enter-final">进入终审</button>
+                <button class="btn btn-warning btn-normalize">待观察</button>
+                <button class="btn btn-danger  btn-normalize">不再关注</button>
+              </span>
+            </div>
+
+          </section>
+
+          <section ng-show="status === 'FINAL_REVIEW'">
+            <div class="row project-info">
+              <h4 class="section-title">终审操作</h4>
+            </div>
+
+            <div class="row project-info">
+              <span class="item-key">操作</span>
+              <span class="item-value">
+                <button class="btn btn-success btn-normalize" ng-click="passFormalReview()">达成投资</button>
+                <button class="btn btn-warning btn-normalize">待观察</button>
+                <button class="btn btn-danger  btn-normalize">不再关注</button>
+              </span>
+            </div>
+
+          </section>
+
+          <section ng-show="status === 'FIRST_REVIEW'">
+            <div class="row project-info">
+              <h4 class="section-title">初审评审信息</h4>
+            </div>
+
+            <div class="row">
+              <button class="btn btn-default float-right" data-toggle="modal" data-target="#id-modal-add-first-review-remark">添加</button>
+              <div class="clear"></div>
+            </div>
+
+            <div class="row remark-info-container">
+
+              <div class="remark-info" ng-repeat="remark in firstReviewProjectRemarksList">
+                <div class="remark-info--manager">
+                  <span><a href="#">{{remark.managerName}}</a></span>
+                  <span class="remark-info--yes-box" ng-show="remark.like">给了一个<span class="remark-info--yes">YES</span></span>
+                  <span class="float-right"><a href="#">编辑</a></span>
+                </div>
+                <div class="remark-info--content">
+                  <p>{{remark.content}}</p>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <section ng-show="status === 'FINAL_REVIEW'">
+            <div class="row project-info">
+              <h4 class="section-title">终审评审信息</h4>
+            </div>
+
+            <div class="row">
+              <button class="btn btn-default float-right" data-toggle="modal" data-target="#id-modal-add-final-review-remark">添加</button>
+              <div class="clear"></div>
+            </div>
+
+            <div class="row final-remark-info-container">
+
+              <div class="remark-info" ng-repeat="remark in finalReviewProjectRemarksList">
+                <div class="remark-info--manager">
+                  <span><a href="#">{{remark.managerName}}</a></span>
+                  <span class="remark-info--yes-box" ng-show="remark.like">给了一个<span class="remark-info--yes">YES</span></span>
+                  <span class="float-right"><a href="#">编辑</a></span>
+                </div>
+                <div class="remark-info--content">
+                  <p>{{remark.content}}</p>
+                </div>
+
+                <div class="final-remark-info--evaluate" ng-show="remark.like">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <span class="item-key" style="width: 80px; margin-top: 15px;  margin-left: 15px;">最多投资额</span>
+                      <span class="item-value" style="width: 80px;">{{remark.upInvestment}}</span>
+                    </div>
+                    <div class="col-md-6">
+                      <span class="item-key" style="width: 80px; margin-top: 15px;  margin-left: 15px;">是否领投</span>
+                      <span class="item-value" style="width: 80px;">{{remark.leadInvestor ? '是' : '否'}}</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <span class="item-key" style="width: 80px; margin-top: 15px; margin-left: 15px;">最多估值</span>
+                      <span class="item-value" style="width: 80px;">{{remark.highestValuation}}</span>
+                    </div>
+                    <div class="col-md-6">
+                      <span class="item-key" style="width: 80px; margin-top: 15px;  margin-left: 15px;">投资类型</span>
+                      <span class="item-value" style="width: 80px;">{{investTypeMap[remark.investType]}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+          </section>
+
+          <!-- Button trigger modal -->
+
+
+
+          <div style="margin-top: 50px;">
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+              Launch demo modal
+            </button>
+            <button type="button" class="btn btn-primary btn-lg" ng-click="changeProjectPhase('FIRST_REVIEW')">
+              直接进入初审部分
+            </button>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 模态框部分 -->
+
+  <!-- Model -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 确定进入终审 -->
+  <div class="modal fade" id="id-modal-confirm-enter-final" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">确认进入终审</h4>
+        </div>
+        <div class="modal-body">
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionA" value="A" ng-click="changeOptionToAS('ANGEL')" checked>
+              天使投资
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionS" value="S" ng-click="changeOptionToAS('SEED')">
+              种子孵化
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" ng-click="changeProjectPhase('FINAL_REVIEW', angelSeedOption)">确认</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 添加初审信息 -->
+  <div class="modal fade" id="id-modal-add-first-review-remark" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">添加初审评审意见</h4>
+        </div>
+        <div class="modal-body">
+          <label>投资经理姓名</label>
+          <br />
+          <input class="form-control" type="text" placeholder="请填写姓名" ng-model="addFirstReviewRemarkModel.managerName" />
+          <br />
+          <label>评价</label>
+          <br />
+          <textarea class="form-control" placeholder="请填写评价" ng-model="addFirstReviewRemarkModel.content"></textarea>
+          <br />
+          <label>意向</label>
+          <select class="form-control" ng-model="addFirstReviewRemarkModel.inclined" ng-options="opinionMap[s] for s in [true, false]"></select>
+          <br />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addFirstReviewRemarkInfo()">确认</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 添加终审信息 -->
+  <div class="modal fade" id="id-modal-add-final-review-remark" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">添加终审评审意见</h4>
+        </div>
+        <div class="modal-body">
+          <label>投资经理姓名</label>
+          <br />
+          <input class="form-control" type="text" placeholder="请填写姓名" ng-model="addFinalReviewRemarkModel.managerName" />
+          <br />
+          <label>评价</label>
+          <br />
+          <textarea class="form-control" placeholder="请填写评价" ng-model="addFinalReviewRemarkModel.content"></textarea>
+          <br />
+          <label>意向</label>
+          <select class="form-control" ng-model="addFinalReviewRemarkModel.inclined" ng-options="opinionMap[s] for s in [true, false]"></select>
+          <br />
+          <div  ng-show="addFinalReviewRemarkModel.inclined">
+            <label>最多投资金额</label>
+            <br />
+            <input class="form-control" placeholder="" ng-model="addFinalReviewRemarkModel.maxInvestment" />
+            <br />
+            <label>最多估值</label>
+            <br />
+            <input class="form-control" placeholder="" ng-model="addFinalReviewRemarkModel.highestEvaluation" />
+            <br />
+            <label>是否领投</label>
+            <br />
+            <select class="form-control" ng-model="addFinalReviewRemarkModel.leadInvest" ng-options="opinionMap[s] for s in [true, false]"></select>
+            <br />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addFinalReviewRemarkInfo()">确认</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

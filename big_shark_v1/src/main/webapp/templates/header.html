@@ -1,0 +1,171 @@
+<style type="text/css">
+
+  .navbar-nav a {
+    color: #444;
+
+  }
+
+  .myNavbar{
+    margin-bottom: 20px;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.05);
+    background-color: #fff;
+  }
+
+  .navbar-brand {
+    padding: 0;
+    padding-right: 25px;
+  }
+
+  .header--big-shark-logo {
+    width: 127px;
+    height: 50px;
+  }
+
+  .is-hidden {
+    display: none !important;
+  }
+
+  .split-line-left {
+    margin-top: 10px;
+    height: 30px;
+    border-right: #aaa 1px solid;
+  }
+
+  .split-line-left--full {
+    height: 50px;
+    margin-top: 0px;
+  }
+
+  .split-line-left a {
+    margin-top: -10px;
+  }
+
+  .split-line-left--full a {
+    margin-top: 0;
+  }
+
+
+  .split-line-right {
+    border-left: #eee 1px solid;
+  }
+
+  .dropdown > a {
+    padding: 10px!important;
+  }
+
+  .navbar-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin-right: 5px;
+  }
+
+  .caret {
+    height: 5px !important;
+  }
+
+  .icon-bar {
+    background: black !important;
+  }
+</style>
+
+<nav class="navbar myNavbar">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!--<a class="navbar-brand" href="/">BIG-SHARK</a>-->
+      <a class="navbar-brand" href="/#/main"><img class="header--big-shark-logo" src="images/big_shark_logo.png" /></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <!--<li><a href="">首页</a></li>-->
+        <li><a href="">入住团队</a></li>
+        <li><a href="">关于我们</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+
+        <!-- 前端开发测试用 -->
+        <!-- <li><a href="" id="navbtn-change-login" ng-show="!isLogin" onclick="javascript:void(0);">改变登录状态[测试用]</a></li> -->
+        <!-- Test part end -->
+
+        <li class="nav-part-not-login split-line-left" ng-show="!isLogin"><a href="/#/login">登录</a></li>
+        <li class="nav-part-not-login" ng-show="!isLogin"><a href="/#/signup">注册</a></li>
+
+        <li class="nav-part-login split-line-left split-line-left--full" ng-show="isLogin && (currentUser.role === 'CUSTOMER')">
+          <a href="/#/projects/new"><span class="glyphicon glyphicon-plus"></span>&nbsp;发起项目</a>
+        </li>
+        <li class="nav-part-login split-line-left split-line-left--full" ng-show="isLogin && (currentUser.role === 'MANAGER')">
+          <a href="/#/review">&nbsp;进入后台</a>
+        </li>
+        <li class="dropdown nav-part-login" ng-show="isLogin">
+          <a href="#" id="nav-dropdown" class="dropdown-toggle" data-hover="dropdown" data-delay="200">
+            <span><img src="images/JoshOY_Avatar.png" class="navbar-avatar"/></span>
+            <span>{{currentUser.name}}</span>
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu" ng-show="isLogin">
+              <li><a tabindex="-1" href="/#/projects" ng-show="currentUser.role === 'CUSTOMER'">我的主页</a></li>
+              <li class="divider" ng-show="currentUser.role === 'CUSTOMER'"></li>
+              <li><a tabindex="-1" href="/#/editprofile">个人设置</a></li>
+              <li class="divider"></li>
+              <li id="navbtn-logout" ng-click="logout()"><a tabindex="-1" href="#">退出登录</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<script type="text/javascript">
+  (function($, window, undefined) {
+    // outside the scope of the jQuery plugin to
+    // keep track of all dropdowns
+    var $allDropdowns = $();
+
+    // if instantlyCloseOthers is true, then it will instantly
+    // shut other nav items when a new one is hovered over
+    $.fn.dropdownHover = function(options) {
+
+        // the element we really care about
+        // is the dropdown-toggle's parent
+        $allDropdowns = $allDropdowns.add(this.parent());
+
+        return this.each(function() {
+            var $this = $(this).parent(),
+                defaults = {
+                    delay: 500,
+                    instantlyCloseOthers: true
+                },
+                data = {
+                    delay: $(this).data('delay'),
+                    instantlyCloseOthers: $(this).data('close-others')
+                },
+                options = $.extend(true, {}, defaults, options, data),
+                timeout;
+
+            $this.hover(function() {
+                if(options.instantlyCloseOthers === true)
+                    $allDropdowns.removeClass('open');
+
+                window.clearTimeout(timeout);
+                $(this).addClass('open');
+            }, function() {
+                timeout = window.setTimeout(function() {
+                    $this.removeClass('open');
+                }, options.delay);
+            });
+        });
+    };
+
+    $('[data-hover="dropdown"]').dropdownHover();
+})(jQuery, this);
+</script>

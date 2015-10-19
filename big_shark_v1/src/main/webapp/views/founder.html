@@ -1,0 +1,115 @@
+<lab-header></lab-header>
+
+<style>
+
+  .founder-page-container {
+    background: white;
+  }
+
+  .notation {
+    color: #aaa;
+  }
+
+  small {
+    font-size: 0.2em !important;
+  }
+
+  .split-line {
+    border-bottom: #ddd 1px solid;
+  }
+
+</style>
+
+<div class="founder-page-container container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1  style="text-align: center; padding-left: 45px;">{{founderName}}<span>&nbsp;&nbsp;<a href=""><small>编辑</small></a></span></h1>
+    </div>
+    <div class="col-md-12 notation" style="text-align: center">
+      <p>{{founderJob}}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-2">
+      <div class="row">
+        <i class="glyphicon glyphicon-phone"></i>
+        <span>&nbsp;&nbsp;</span>
+        <span>{{founderCellphone}}</span>
+      </div>
+
+      <div class="row">
+        <i class="glyphicon glyphicon-comment"></i>
+        <span>&nbsp;&nbsp;</span>
+        <span>{{founderWechatId}}</span>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="row">
+        <i class="glyphicon glyphicon-user"></i>
+        <span>&nbsp;&nbsp;</span>
+        <span>{{founderCitizenId}}</span>
+      </div>
+
+      <div class="row">
+        <i class="glyphicon glyphicon-envelope"></i>
+        <span>&nbsp;&nbsp;</span>
+        <span>{{founderEmail}}</span>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+
+  </div>
+
+  <div class="row" style="margin-top: 35px;">
+
+  <div class="col-md-12">
+    <h3 style="text-align: center;">工作经历</h3>
+    <span style="float: right; margin-right: 20%; font-size: 1.2em;"><a href="">添加</a></span>
+  </div>
+
+</div>
+
+  <div class="row split-line"></div>
+
+  <div class="row" ng-repeat="exp in founderExperiences" style="margin-top: 25px;">
+    <div class="md-col-8 col-md-offset-2" style="height:2.5em; line-height: 2.5em;">
+      <span style="">{{exp.corporation}}</span>
+      <span style="float: right; margin-right: 25%;"><a href="">编辑</a></span>
+    </div>
+    <div class="md-col-8 col-md-offset-2" style="height:2.5em; line-height: 2.5em;">
+      <span style="">{{exp.job}}</span>
+      <span style="float: right; margin-right: 25%;">{{exp.time}}</span>
+
+    </div>
+  </div>
+
+
+  <div class="row" style="margin-top: 35px;">
+
+    <div class="col-md-12">
+      <h3 style="text-align: center;">教育信息</h3>
+      <span style="float: right; margin-right: 20%; font-size: 1.2em;"><a href="">添加</a></span>
+    </div>
+
+  </div>
+
+  <div class="row split-line"></div>
+
+  <div class="row" ng-repeat="exp in educationInfo" style="margin-top: 25px;">
+    <div class="md-col-8 col-md-offset-2" style="height:2.5em; line-height: 2.5em;">
+      <span style="">{{exp.schoolName}}</span>
+      <span style="float: right; margin-right: 25%;"><a href="">编辑</a></span>
+    </div>
+    <div class="md-col-8 col-md-offset-2" style="height:2.5em; line-height: 2.5em;">
+      <span style="">{{exp.degree}}</span>
+      <span style="float: right; margin-right: 25%;">{{exp.time}}</span>
+
+    </div>
+  </div>
+
+  <div class="row" style="height: 55px;"></div>
+
+
+</div>

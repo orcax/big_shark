@@ -1,0 +1,45 @@
+.page-review {
+
+}
+
+#wrapper {
+  width: 1220px;
+}
+
+#page-wrapper{
+  min-height: 800px;
+}
+
+.page-header{
+  font-size: 27px;
+  margin-bottom: 50px;
+}
+
+table.dataTable.no-footer{
+  margin-top: 20px !important;
+}
+
+.navbar-default {
+  margin-top: 0;
+}
+
+.navbar-brand {
+  margin: 0 !important;
+  padding: 0 !important;
+  margin-left: -15px !important;
+  margin-right: 25px !important;
+}
+
+
+.sidebar{
+    min-height: 800px;
+    background-color: #fff;
+    border-left: solid #ccc 1px;
+    border-top: solid #ccc 1px;
+}
+
+.review-content{
+    margin: 0;
+    margin: 0 auto;
+    margin-bottom: 100px;
+}

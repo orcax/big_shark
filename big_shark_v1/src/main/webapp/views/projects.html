@@ -1,0 +1,109 @@
+<lab-header></lab-header>
+<style type="text/css">
+  .header{
+    margin: 40px 0 20px;
+  }
+  .header .avatar{
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    margin-bottom: 26px;
+  }
+  .header .info{
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  .project-list{
+    position: relative;
+    margin-top: 40px;
+  }
+  ul{
+    list-style: none;
+  }
+  .project-item-container{
+    padding: 0 200px;
+  }
+  .project-item{
+    position: relative;
+  }
+  li.project-item:hover{
+    background-color: #f9f9f9;
+  }
+  .project-group{
+    position: relative;
+    padding: 15px 20px;
+  }
+  .project-description{
+    float: left;
+    width: 60%;
+  }
+  .project-title{
+    color: #1ed0e1;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .project-description{
+
+  }
+  .project-link{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+</style>
+
+<div class="row text-center">
+  <div class="header">
+    <img class="avatar" src="http://p4.music.126.net/M_kNmV6i2o-WO09kTBSwxQ==/7947270046438464.jpg?param=140y140" alt="avatar" />
+    <div class="info">
+      {{userRealName}}
+    </div>
+    <a class="btn btn-default" href="/#/projects/new">创建项目</a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="container project-list">
+
+    <div ng-show="!listLoaded" style="text-align: center;">您已创建项目正在加载中...</div>
+
+    <ul class="project-item-container">
+
+      <li class="project-item" ng-repeat="project in userProjectsList" ng-click="changeEditingProject(project)">
+        <div class="project-group clearfix">
+          <div class="project-description">
+            <a class="project-title" href="#" target="_blank">{{project.name}}</a>
+            <br />
+            <span class="description">
+              {{project.description}}
+            </span>
+          </div>
+          <ul class="pull-right">
+            <span> 状态: {{ projectStatusMap[project['phase']] }} </span>
+          </ul>
+        </div>
+        <a class="project-link" href="/#/projects/edit"></a>
+      </li>
+
+      <!--<li class="project-item">-->
+        <!--<div class="project-group clearfix ">-->
+          <!--<div class="project-description">-->
+            <!--<a class="project-title" href="/#/projects/edit" target="_blank">项目名称</a>-->
+            <!--<br>-->
+            <!--<span class="description">-->
+              <!--项目描述...-->
+            <!--</span>-->
+          <!--</div>-->
+          <!--<ul class="pull-right">-->
+            <!--<span>状态：草稿</span>-->
+          <!--</ul>-->
+        <!--</div>-->
+        <!--<a class="project-link" href="/#/projects/edit" target="_blank"></a>-->
+      <!--</li>-->
+
+    </ul>
+  </div>
+</div>

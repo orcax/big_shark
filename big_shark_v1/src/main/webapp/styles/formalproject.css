@@ -1,0 +1,431 @@
+.is-hidden {
+  display: none;
+}
+
+.page-formal-project {
+
+}
+
+.table {
+  width: 95%;
+  margin-left: 2.5%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: #eee 1px solid;
+}
+
+tr, td, th{
+  text-align: center!important;
+}
+
+.l-blank {
+  height: 20px;
+  clear: both;
+}
+
+.l-clear {
+  clear: both;
+}
+
+.l-banner {
+  width: 100%;
+  height: 200px;
+  background: white;
+}
+
+.l-ownership-info {
+  margin-left: 15px;
+  margin-right: 15px;
+  min-height: 250px;
+  padding-bottom: 10px;
+  background: white;
+}
+
+.l-progress-info {
+  margin-left: 15px;
+  margin-right: 15px;
+  min-height: 550px;
+  background: white;
+}
+
+.l-right-box {
+  background: white;
+  min-height: 750px;
+}
+
+/* Banner part */
+
+.l-banner--info {
+  height: 150px;
+  float: left;
+}
+
+.l-banner--selections {
+  background: #eee;
+  width: 100%;
+  margin-right: 15px;
+  height: 50px;
+  border: #ddd 1px solid;
+  float: left;
+}
+
+.box-company-logo {
+  margin: 25px;
+  float: left;
+}
+
+.box-company-brief {
+  float: left;
+}
+
+.box-company-logo > img{
+  width: 100px;
+  height: 100px;
+}
+
+.box-company-brief {
+  margin-top: 5px;
+}
+
+.box-company-brief > h1 {
+  font-size: 2em;
+  /*line-height: 1.5em;*/
+  margin-bottom: 15px;
+}
+
+.box-company-brief > h3 {
+  margin-top: 0;
+  font-size: 1em;
+}
+
+.box-company-brief > p {
+  margin-top: 20px;
+  font-size: 1em;
+  color: #aaa;
+}
+
+#tags {
+  margin-left: 5px;
+}
+
+.l-banner--selections > a {
+  display: block;
+  width: 100px;
+  text-align: center;
+  height: 48px;
+  line-height: 50px;
+  border-right: #ddd 1px solid;
+  color: #444;
+  text-decoration: none;
+  float: left;
+}
+
+.l-banner--selections > a:hover {
+  text-decoration: none;
+  color: #444;
+}
+
+
+.is-current-selection {
+  background: white;
+}
+
+
+/**/
+
+.l-info-nav {
+  background: white;
+  width: 100%;
+  height: 45px;
+  padding-left: 15px;
+  border-bottom: #ddd 1px solid;
+}
+
+.l-info-nav--description {
+  float: left;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  width: 120px;
+  border-bottom: #3278b5 2px solid;
+}
+
+.l-info-nav--add {
+  float: right;
+  height: 42px;
+  line-height: 40px;
+  text-align: center;
+  width: 80px;
+  color: #3278b5;
+  background: white;
+  border: none;
+}
+
+/* 项目进展 */
+
+.l-progress-info--content {
+  display: block;
+  margin-top: 25px;
+  width: 100%;
+  min-height: 50px;
+}
+.l-progress-info--content li {
+  margin-top: 15px;
+}
+.progress-info {
+
+}
+.progress-info--operations {
+  float: right;
+  display: inline-block;
+  margin-right: 45px;
+}
+
+.progress-info span:after {
+  color: white;
+  display: inline-block;
+  margin-left: 15px;
+  width: 65px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+}
+
+.progress-info--text {
+  clear: both;
+  color: #444;
+}
+
+.progress-info--time {
+  color: #bbb;
+  height: 30px;
+}
+
+.progress-type-spread {
+  color: #EB2388;
+}
+.progress-type-spread span:after {
+  content: "用户推广";
+  background: #EB2388;
+}
+
+.progress-type-update {
+  color: #34C86E;
+}
+.progress-type-update span:after {
+  content: "版本更新";
+  background: #34C86E;
+}
+
+.progress-type-media {
+  color: #FA9D24;
+}
+.progress-type-media span:after {
+  content: "媒体报道";
+  background: #FA9D24;
+}
+
+.progress-type-financing {
+  color: #E744E9;
+}
+.progress-type-financing span:after {
+  content: "融资洽谈";
+  background: #E744E9;
+}
+
+.progress-type-cooperation {
+  color: #32A4F1;
+}
+.progress-type-cooperation span:after {
+  content: "业务合作";
+  background: #32A4F1;
+}
+
+.progress-type-awarding {
+  color: #EC433E;
+}
+.progress-type-awarding span:after {
+  content: "比赛获奖";
+  background: #EC433E;
+}
+
+/* 右侧边栏 */
+
+.l-right-box {
+  margin: 0;
+  padding-top: 10px;
+  min-height: 25px;
+}
+
+.l-right-box-item {
+  margin-left: 15px;
+  margin-right: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: #ddd 1px solid;
+}
+
+.l-right-box-item h1 {
+  font-size: 1.15em;
+  margin-top: 0;
+  margin-left: 5px;
+  height: 25px;
+}
+
+.l-right-box-item ul {
+  list-style: none;
+  padding-left: 0;
+  padding-right: 10px;
+  margin-left: 5px;
+}
+
+.l-right-box-item ul > li{
+  clear: both;
+  display: block;
+  width: 100%;
+  padding-left: 0;
+  height: 25px;
+}
+
+/* 用于最后一个大项, 去除底部边框 */
+.l-right-box-item--no-border {
+  border: none;
+  padding-bottom: 15px;
+}
+
+.notation {
+  color: #aaa;
+}
+
+.l-right-box-item--key {
+  float: left;
+  color: #aaa;
+}
+
+.l-right-box-item--value {
+  float: right;
+}
+
+
+/* 运营数据, 项目评估 */
+.l-operational-data, .l-project-evaluate {
+  margin-left: 15px;
+  margin-right: 15px;
+  min-height: 120px;
+  /*padding-bottom: 10px;*/
+  background: white;
+}
+
+.l-project-evaluate--item {
+  min-height: 120px;
+  background: white;
+  border-bottom: #ddd 1px solid;
+}
+
+.evaluator-info {
+  width: 100%;
+  height: 55px;
+  float: left;
+}
+
+.evaluator-info img {
+  margin-left: 35px;
+  /*margin-top: 20px;*/
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+}
+
+.evaluator-info--name {
+  display: inline-block;
+  margin-left: 20px;
+  margin-top: 20px;
+  height: 35px;
+  line-height: 35px;
+  font-size: 1.10em;
+}
+
+.evaluator-info--name a:hover {
+  text-decoration: none;
+}
+
+.evaluator-info--time {
+  display: inline-block;
+  margin-left: 25px;
+  margin-top: 20px;
+  height: 35px;
+  line-height: 35px;
+}
+
+.evaluator-info--operations {
+  display: inline-block;
+  margin-right: 25px;
+  margin-top: 20px;
+  height: 35px;
+  line-height: 35px;
+
+  float: right;
+}
+
+.evaluator-info--operations a {
+  color: #aaa;
+}
+
+.evaluator-info--operations a:hover {
+  color: #444;
+  text-decoration: none;
+}
+
+.evaluation-content {
+  color: #444;
+  margin-left: 95px;
+  margin-top: 10px;
+}
+
+/* 模态框 */
+.modal-title {
+  text-align: center;
+}
+
+.modal-body textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 90px;
+}
+
+.add-share-changes--steps-box {
+  width: 100%;
+  text-align: center;
+}
+
+.add-share-changes--step {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  padding-top: 7px;
+  line-height: 5px;
+  vertical-align: middle;
+  background: #3278b5;
+  color: white;
+  border-radius: 100%;
+}
+
+.company-name-notation {
+  font-size: 0.8em;
+  color: #aaa;
+}
+
+.is-not-current-step {
+  background: grey;
+}
+
+.founder-add-btn {
+  float: right;
+  color: #3278b5;
+  font-size: 0.68em;
+  cursor: pointer;
+  font-weight: normal;
+}

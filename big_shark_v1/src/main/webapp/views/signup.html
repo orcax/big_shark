@@ -1,0 +1,28 @@
+<div class="topbanner">
+  <div class="header-wrapper">
+    <a href="/" class="title"><h1>aaa</h1></a>
+    <p class="desc">注册后即可提交项目，开始融资</p>
+  </div>
+</div>
+<div class="myContainer">
+  <form name="signupForm" novalidate>
+    <input name="account" type="email" class="form-control login-input" placeholder="常用邮箱，作为登录账号" autofocus="" ng-model="signupData.account" required>
+    <input name="password" type="password" class="form-control login-input" placeholder="设置密码" ng-model="signupData.password" required ng-minlength="6">
+    <input name="name" type="text" class="form-control login-input" placeholder="您的真实姓名" autofocus="" ng-model="signupData.name" required ng-maxlenth="10">
+    <select class="form-control login-select" ng-model="signupData.gender" name="gender" ng-options="g.text for g in genders track by g.value">
+      <option value="">请选择</option>
+    </select>
+    <div class="validation" ng-show="((signupForm.account.$dirty && signupForm.account.$invalid) || (signupForm.password.$dirty && signupForm.password.$invalid) || (signupForm.name.$dirty && signupForm.name.$invalid) || (signupForm.gender.$pristine)) && (signupForm.submitted)">
+      <li ng-show="signupForm.account.$error.account">邮箱格式错误</li>
+      <li ng-show="signupForm.account.$error.required">请填写邮箱</li>
+      <li ng-show="signupForm.password.$error.minlength">密码至少六位</li>
+      <li ng-show="signupForm.password.$error.required">请填写密码</li>
+      <li ng-show="signupForm.name.$error.required">请填写姓名</li>
+      <li ng-show="signupForm.name.$error.maxlength">姓名不能超过10个字符</li>
+      <li ng-show="signupForm.gender.$pristine">请选择性别</li>
+    </div>
+    <button class="btn btn-primary login-btn" ng-click="signup()">注册</button>
+    <p class="agreement">点击注册，即同意我们的<a href="">xx协议</a></p>
+
+  </form>
+</div>

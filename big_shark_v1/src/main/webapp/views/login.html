@@ -1,0 +1,25 @@
+<div class="topbanner">
+  <div class="header-wrapper">
+    <a href="/" class="title"><h1>aaa</h1></a>
+    <p class="desc">欢迎登录  |  <span>没有账号？<a href="/#/signup">立即注册</a></span></p>
+  </div>
+</div>
+<div class="myContainer">
+  <form name="loginForm" novalidate>
+    <input name="userName" type="email" class="form-control login-input" placeholder="登录邮箱" autofocus="" ng-model="login_name" required>
+    <input name="userPWD" type="password" class="form-control login-input" placeholder="密码" ng-model="login_password" required ng-minlength="6">
+    <div class="validation" ng-show="((loginForm.userName.$dirty && loginForm.userName.$invalid) || (loginForm.userPWD.$dirty && loginForm.userPWD.$invalid)) && (loginForm.submitted)">
+      <li ng-show="loginForm.userName.$error.email">邮箱格式错误</li>
+      <li ng-show="loginForm.userName.$error.required">请填写邮箱</li>
+      <li ng-show="loginForm.userPWD.$error.minlength">密码至少六位</li>
+      <li ng-show="loginForm.userPWD.$error.required">请填写密码</li>
+    </div>
+    <button class="btn btn-primary login-btn" ng-click="login()">登录</button>
+    <div class="forget-link">
+      <a ng-click="forgotPassword()" href="">
+        忘记密码?
+      </a>
+    </div>
+
+  </form>
+</div>

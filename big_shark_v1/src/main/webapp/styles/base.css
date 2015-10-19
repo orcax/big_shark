@@ -1,0 +1,10 @@
+html {
+  -webkit-font-smoothing: antialiased;
+  font-family: "Microsoft YaHei","微软雅黑","STHeiti","WenQuanYi Micro Hei",SimSun,sans-serif;
+}
+body {
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #383838;
+  background-color: #ededed;
+}

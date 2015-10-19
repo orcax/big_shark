@@ -1,0 +1,321 @@
+
+<lab-header></lab-header>
+
+<style type="text/css">
+
+.clear {
+  clear: both;
+  height: 15px;
+}
+
+.disabled {
+  display: none;
+}
+
+.profile-edit-container {
+  /*background: grey;*/
+}
+
+.panel-info {
+  height: 150px;
+}
+
+.panel-tab {
+  height: 100px;
+}
+
+.profile-edit--panel {
+  /*padding-left: 25px;*/
+  /*padding-right: 25px;*/
+  background: #FFF;
+  border-radius: 2px;
+}
+
+.profile-edit--panel__avatar {
+  text-align: center;
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 35px;
+}
+
+.profile-edit--panel__avatar img {
+  width: 90px;
+  height: 90px;
+  margin-top: 30px;
+}
+
+.profile-edit--panel__name {
+  text-align: center;
+  padding-left: 25px;
+  height: 150px;
+}
+
+.profile-edit--panel__name h2 {
+  color: #4b4b4b;
+  text-align: left;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding-top: 30px;
+}
+
+.profile-edit--panel__name p {
+  text-align: left;
+  color: #c9c9c9;
+}
+
+
+.profile-edit--panel__second-row {
+  background: #FFF;
+
+}
+
+.profile-edit--panel__tab {
+  height: 50px;
+  border-bottom: lightgrey 1px solid;
+  line-height: 50px;
+  font-size: 1.2em;
+  color: #c9c9c9;
+  padding-left: 35px;
+}
+
+.activated {
+  color: #444;
+}
+
+
+.panel-edit-personal-info {
+  height: 380px;
+}
+
+
+.panel-edit-personal-info h2 {
+  padding-left: 5%;
+  padding-top: -15px;
+  font-size: 1.5em;
+  /*line-height: 15px;*/
+}
+
+.profile-edit--panel__form {
+
+}
+
+.profile-edit--panel__form label {
+  width: 20%;
+  /*height: 50px;*/
+  float:left;
+  margin-left: 5%;
+  line-height: 35px;
+  font-size: 1.25em;
+  color: #c9c9c9;
+}
+
+.profile-edit--panel__form input, .profile-edit--panel__form select {
+  width: 55%;
+  /*height: 50px;*/
+  float: left;
+}
+
+.profile-edit--panel__upload_avatar {
+  width: 90px;
+  height: 90px;
+}
+
+.upload-file-btn {
+  margin-left: 15px;
+  background: white;
+  border: #286090 1px solid;
+  color: #286090;
+}
+
+.btn-save {
+  width: 120px;
+}
+
+/* 响应式布局 */
+
+@media screen and (max-width: 992px) {
+  .panel-tab {
+    height: 100px !important;
+  }
+  .profile-edit--panel {
+    height: 380px;
+    margin-top: 10px;
+  }
+  .panel-info {
+    height: 230px !important;
+  }
+  .profile-edit--panel__name h2 {
+    text-align: center;
+    padding-top: 0 !important;
+  }
+  .profile-edit--panel__name p {
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  .profile-edit--panel__avatar {
+    padding-left: 25px!important;
+  }
+}
+
+</style>
+
+<div class="row profile-edit-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+
+          <!-- 左边的信息框 -->
+          <div class="col-md-4">
+            <div class="profile-edit--panel panel-info">
+              <div class="row profile-edit--panel__first-row">
+                <div class="col-md-4 profile-edit--panel__avatar">
+                  <img src="images/JoshOY_Avatar.png" class="img-circle" alt="您的头像">
+                </div>
+                <div class="col-md-8 profile-edit--panel__name">
+                  <h2>{{realName}}</h2>
+                  <p>{{contactMail}}</p>
+                </div>
+              </div>
+            </div>
+
+            <br />
+            <!-- 左边的tab -->
+            <div class="profile-edit--panel panel-tab">
+              <div class="profile-edit--panel__second-row">
+                <a id="change-panel-1" href="."><div class="col-md-12 profile-edit--panel__tab activated">
+                  <span>个人信息</span>
+                </div></a>
+                <a id="change-panel-2" href="."><div class="col-md-12 profile-edit--panel__tab">
+                  <span>账号密码</span>
+                </div></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 右边的修改信息框 -->
+          <div class="col-md-8">
+
+            <!-- 个人信息面板 -->
+            <div id="panel1" class="profile-edit--panel panel-edit-personal-info">
+              <br />
+              <h2>个人信息</h2>
+              <br />
+              <form class="profile-edit--panel__form">
+                <div class="form-group">
+                  <div>
+                    <label>姓名</label>
+                    <input class="form-control" type="text" name="editName" ng-model="realNameEdit">
+                  </div>
+
+                  <div class="clear"></div>
+
+                  <div>
+                    <label>性别</label>
+                    <select class="form-control" name="editGender" ng-model="gender" ng-options="g for g in genderOptions">
+
+                    </select>
+                  </div>
+
+                  <div class="clear"></div>
+
+                  <div>
+                    <label>头像</label>
+                    <img src="images/JoshOY_Avatar.png" class="img-circle profile-edit--panel__upload_avatar" alt="上传头像">
+                    <button class="btn btn-primary upload-file-btn" ng-file-select ng-file-change="updateUserAvatar($files)">上传头像</button>
+                  </div>
+
+                  <div class="clear"></div>
+                  <div class="clear"></div>
+
+                  <div>
+                    <label></label>
+                    <button class="btn btn-primary btn-save" ng-click="saveUserInfo()">保存</button>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+
+            <!-- 账号密码面板 -->
+            <div id="panel2" class="profile-edit--panel panel-edit-personal-info ">
+              <br />
+              <h2>账号密码</h2>
+              <br />
+              <form class="profile-edit--panel__form">
+                <div class="form-group">
+                  <div>
+                    <label>旧密码</label>
+                    <input ng-model="oldPassword" class="form-control" type="password">
+                  </div>
+
+                  <div class="clear"></div>
+
+                  <div>
+                    <label>新密码</label>
+                    <input ng-model="newPassword" class="form-control" type="password">
+                  </div>
+
+                  <div class="clear"></div>
+
+                  <div>
+                    <label>确认新密码</label>
+                    <input ng-model="newPasswordRepeat" class="form-control" type="password">
+                  </div>
+
+                  <div class="clear"></div>
+
+                  <div>
+                    <label></label>
+                    <button class="btn btn-primary btn-save" ng-click="updateNewPassword()">修改密码</button>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+$(document).ready(function(){
+  console.log('Document Ready. Initializing...');
+
+  window.g = {};
+  window.g.currentPanel = 1;
+
+  $('#panel2').addClass('disabled');
+
+  $('#change-panel-1').click(function(){
+    if (window.g.currentPanel === 2) {
+      $('#panel2').addClass('disabled');
+      $('#panel1').removeClass('disabled');
+      $('#change-panel-1 > div').addClass('activated');
+      $('#change-panel-2 > div').removeClass('activated');
+      window.g.currentPanel = 1;
+    }
+  });
+
+  $('#change-panel-2').click(function(){
+    if (window.g.currentPanel === 1) {
+      $('#panel1').addClass('disabled');
+      $('#panel2').removeClass('disabled');
+      $('#change-panel-2 > div').addClass('activated');
+      $('#change-panel-1 > div').removeClass('activated');
+      window.g.currentPanel = 2;
+    }
+  });
+
+  console.log('Initialize done.');
+});
+
+</script>

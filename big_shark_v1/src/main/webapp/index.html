@@ -1,0 +1,128 @@
+<!doctype html>
+<html class="no-js"  >
+<head>
+	<meta charset="utf-8">
+	<title>大鲨鱼</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<!-- build:css(.) styles/vendor.css -->
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+
+	<!-- bower:css -->
+	<link rel="stylesheet" href="bower_components/angular-inform/dist/angular-inform.css" />
+	<link rel="stylesheet" href="bower_components/angular-dialog-service/dialogs.min.css" />
+	<link rel="stylesheet" href="bower_components/sweetalert/lib/sweet-alert.css" />
+	<link rel="stylesheet" href="bower_components/selectize/dist/css/selectize.css" />
+	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+	<link rel="stylesheet" href="bower_components/datatables/media/css/jquery.dataTables.css" />
+	<link rel="stylesheet" href="bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.css" />
+	<!-- endbower -->
+	<!-- endbuild -->
+	<!-- custom css -->
+	<link rel="stylesheet" href="styles/base.css" />
+	<link rel="stylesheet" href="styles/login.css" />
+	<!-- endcustom css -->
+	<!-- build:css(.tmp) styles/main.css -->
+	<!--[if lt IE 9]>
+	<script>window.location.href = 'upgrade.html';</script>
+	<![endif]-->
+	<!-- endbuild -->
+</head>
+<body ng-app="bigshark">
+	<!--[if lt IE 7]>
+	<p class="browsehappy">
+		你使用的浏览器版本太老，请使用最新谷歌浏览器，获得更好的网络体验。
+		<a href="http://browsehappy.com/">upgrade your browser</a>
+		to improve your experience.
+	</p>
+	<![endif]-->
+
+	<div ui-view style="min-height: 800px;"></div>
+
+	<!-- build:js(.) /scripts/vendor.js -->
+	<!-- bower:js -->
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/jsog/lib/JSOG.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.js"></script>
+	<script src="bower_components/angular-aria/angular-aria.js"></script>
+	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+	<script src="bower_components/angular-messages/angular-messages.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/jquery-ui/jquery-ui.js"></script>
+	<script src="bower_components/angular-ui-sortable/sortable.js"></script>
+	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script src="bower_components/angular-touch/angular-touch.js"></script>
+	<script src="bower_components/angular-inform/dist/angular-inform.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script src="bower_components/angular-translate/angular-translate.js"></script>
+	<script src="bower_components/angular-dialog-service/dialogs.min.js"></script>
+	<script src="bower_components/angular-dialog-service/dialogs-default-translations.min.js"></script>
+	<script src="bower_components/sweetalert/lib/sweet-alert.js"></script>
+	<script src="bower_components/angular-sweetalert/SweetAlert.js"></script>
+	<script src="bower_components/ngstorage/ngStorage.js"></script>
+  <!-- 务必注意这三个顺序不能错 -->
+  <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+	<script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
+	<script src="bower_components/ng-file-upload-shim/angular-file-upload-shim.js"></script>
+	<!-- end -->
+	<script src="bower_components/sifter/sifter.js"></script>
+	<script src="bower_components/microplugin/src/microplugin.js"></script>
+	<script src="bower_components/selectize/dist/js/selectize.js"></script>
+	<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+	<script src="bower_components/angular-selectize2/dist/selectize.js"></script>
+	<script src="bower_components/datatables/media/js/jquery.dataTables.js"></script>
+	<script src="bower_components/angular-datatables/dist/angular-datatables.js"></script>
+	<script src="bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
+	<script src="bower_components/angular-datatables/dist/plugins/colreorder/angular-datatables.colreorder.js"></script>
+	<script src="bower_components/angular-datatables/dist/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+	<script src="bower_components/angular-datatables/dist/plugins/colvis/angular-datatables.colvis.js"></script>
+	<script src="bower_components/angular-datatables/dist/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+	<script src="bower_components/angular-datatables/dist/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
+	<script src="bower_components/angular-datatables/dist/plugins/scroller/angular-datatables.scroller.js"></script>
+	<script src="bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.js"></script>
+	<!-- endbower -->
+	<!-- endbuild -->
+
+	<!-- build:js({.tmp,app}) /scripts/scripts.js -->
+	<script src="/scripts/app.js"></script>
+	<script src="/scripts/routes.js"></script>
+	<script src="/scripts/lazyload.js"></script>
+
+	<script src="/scripts/controllers/main.js"></script>
+	<script src="/scripts/controllers/login.js"></script>
+	<script src="/scripts/controllers/projects.js"></script>
+	<script src="/scripts/controllers/profile.js"></script>
+  <script src="/scripts/controllers/editprofile.js"></script>
+  <script src="/scripts/controllers/formalproject.js"></script>
+  <script src="/scripts/controllers/review.js"></script>
+  <script src="/scripts/controllers/reviewdetail.js"></script>
+  <script src="/scripts/controllers/founder.js"></script>
+	<script src="/scripts/common/jquery.isloading.min.js"></script>
+
+	<script src="/scripts/directives/app-header.js"></script>
+	<script src="/scripts/directives/app-footer.js"></script>
+
+	<script src="/scripts/services/general-service.js"></script>
+	<script src="/scripts/services/modal-service.js"></script>
+	<script src="/scripts/services/q-service.js"></script>
+	<script src="/scripts/services/session-service.js"></script>
+  <script src="/scripts/services/project-service.js"></script>
+
+	<script src="/scripts/factories/token-factory.js"></script>
+	<script src="/scripts/factories/account-factory.js"></script>
+  <script src="/scripts/factories/project-factory.js"></script>
+  <script src="/scripts/factories/review-factory.js"></script>
+  <script src="/scripts/factories/equity-factory.js"></script>
+  <script src="/scripts/factories/progress-factory.js"></script>
+  <script src="/scripts/factories/founder-factory.js"></script>
+
+	<script src="/scripts/filters/common-filter.js"></script>
+
+	<!-- endbuild -->
+</body>
+</html>

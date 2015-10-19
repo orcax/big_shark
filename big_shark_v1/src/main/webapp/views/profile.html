@@ -1,0 +1,86 @@
+<lab-header></lab-header>
+<style type="text/css">
+  .intro-words{
+    margin: 10px 0 20px;
+  }
+
+</style>
+<div class="container">
+    <div class="intro-words">
+      <strong>修改个人信息</strong>
+    </div>
+    <div>
+      <span class="message-alert" style="font-size:13px;">{{message1}}</span>
+    </div>
+
+    <form>
+      <div class="form-horizontal intro-form">
+        <div class="form-group">
+          <label for="input2" class="col-sm-2 label-control"><span class="required">* </span>姓名</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input2" placeholder="" ng-model="form1.name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input4">性别</label>
+          <select class="form-control" id="input4" ng-model="gender" ng-options="g for g in genders">
+            <option value="">请选择</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="input4">头像</label>
+          <input type="file">
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <a href="" class="btn btn-default" ng-click="update()">更新资料</a>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+    <div class="intro-words">
+      <strong>修改密码</strong>
+    </div>
+    <div>
+      <span class="message-alert" style="font-size:13px;">{{message2}}</span>
+    </div>
+
+    <form>
+      <div class="form-horizontal intro-form">
+        <div class="form-group">
+          <label for="input1" class="col-sm-2 label-control">登录邮箱</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input1" placeholder="" ng-model="form2.email" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input2" class="col-sm-2 label-control">旧密码</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input2" placeholder="" ng-model="form2.old_pwd">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input3" class="col-sm-2 label-control">新密码</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input3" placeholder="" ng-model="form2.new_pwd">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input4" class="col-sm-2 label-control">确认密码</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input4" placeholder="" ng-model="form2.confirm_pwd">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <a href="" class="btn btn-default" ng-click="changePwd()">修改密码</a>
+          </div>
+        </div>
+
+      </div>
+    </form>
+</div>

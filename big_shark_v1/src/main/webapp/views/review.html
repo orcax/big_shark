@@ -1,0 +1,362 @@
+<lab-header></lab-header>
+
+<div class="page-review">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../sb_admin_2_dep/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../sb_admin_2_dep/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link href="../sb_admin_2_dep/dist/css/timeline.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="../sb_admin_2_dep/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../sb_admin_2_dep/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../sb_admin_2_dep/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../sb_admin_2_dep/bower_components/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../sb_admin_2_dep/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <!--&lt;!&ndash;<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>&ndash;&gt;-->
+    <!--&lt;!&ndash;<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>&ndash;&gt;-->
+    <!--<![endif]&ndash;&gt;-->
+    <link href="../styles/review.css" type="text/css" rel="stylesheet" />
+    
+
+  <div id="wrapper" class="review-content">
+
+    <!-- Navigation -->
+    <nav role="navigation" style="margin-bottom: 0">
+
+      <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+          <ul class="nav" id="side-menu">
+            <li class="sidebar-search">
+              <div class="input-group custom-search-form">
+              <h2 class="" style="font-size:27px;">管理后台</h2>
+              </div>
+              <!-- /input-group -->
+            </li>
+            <!--<li>-->
+              <!--<a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>-->
+            <!--</li>-->
+
+            <li>
+              <a href="#" ng-click="changeViewingTab(0)"><i class="fa fa-bar-chart-o fa-fw"></i> 海选项目({{auditionProjectList.length}})</a>
+            </li>
+            <li>
+              <a href="#" ng-click="changeViewingTab(1)"><i class="fa fa-star-half-o fa-fw"></i> 初审项目({{firstReviewProjectList.length}})</a>
+            </li>
+            <li>
+              <a href="#" ng-click="changeViewingTab(2)"><i class="fa fa-star fa-fw"></i> 终审项目({{finalReviewProjectList.length}})</a>
+            </li>
+            <li>
+              <a href="#" ng-click="changeViewingTab(3)"><i class="fa fa-check fa-fw"></i> 备案项目({{formalProjectList.length}})</a>
+            </li>
+            <li>
+              <a href="#" ng-click="changeViewingTab(4)"><i class="fa fa-question fa-fw"></i> 待观察({{observingProjectList.length}})</a>
+            </li>
+            <li>
+              <a href="#" ng-click="changeViewingTab(5)"><i class="fa fa-trash-o fa-fw"></i> 垃圾箱({{trashProjectList.length}})</a>
+            </li>
+            <li>
+              <a href="#" ng-click="changeViewingTab(6)"><i class="fa fa-user-md fa-fw"></i> 用户管理</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+      </div>
+      <!-- /.navbar-static-side -->
+    </nav>
+
+    <div id="page-wrapper">
+      <div class="row">
+        <!-- <div class="col-lg-12">
+          <h1 class="page-header">大鲨鱼后台</h1>
+        </div> -->
+        <!-- /.col-lg-12 -->
+      </div>
+      <!-- /.row -->
+
+      <!-- 海选项目表格 -->
+
+      <div ng-show="viewingTab === 0">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header">海选项目</h1>
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
+        <table datatable="ng" class="table table-striped table-bordered table-hover" id="dataTables-1">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>项目名称</th>
+              <th>项目负责人</th>
+              <th>开始时间</th>
+              <th>所在城市</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="gradeX" ng-repeat="project in auditionProjectList">
+              <td>{{project.pid}}</td>
+              <td>{{project.name}}</td>
+              <td>{{project.contactName}}</td>
+              <td>{{project.startTime | date:"yyyy年MM月"}}</td>
+              <td>{{project.city}}</td>
+              <td><a href="/#/reviewdetail/{{project.pid}}" target="_blank"><button class="btn btn-default"> 详情 </button></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 海选项目表格 end -->
+
+      <div ng-show="viewingTab === 1">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header">初审项目</h1>
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
+        <table datatable="ng" class="table table-striped table-bordered table-hover" id="dataTables-2">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>项目名称</th>
+              <th>项目负责人</th>
+              <th>开始时间</th>
+              <th>所在城市</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="gradeX" ng-repeat="project in firstReviewProjectList">
+              <td>{{project.pid}}</td>
+              <td>{{project.name}}</td>
+              <td>{{project.contactName}}</td>
+              <td>{{project.startTime | date:"yyyy年MM月"}}</td>
+              <td>{{project.city}}</td>
+              <td>{{project.notified ? '已通知' : '未通知'}}</td>
+              <td><a href="/#/reviewdetail/{{project.pid}}" target="_blank"><button class="btn btn-default"> 详情 </button></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div ng-show="viewingTab === 2">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header">终审项目</h1>
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
+        <table datatable="ng" class="table table-striped table-bordered table-hover" id="dataTables-3">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>项目名称</th>
+            <th>项目负责人</th>
+            <th>开始时间</th>
+            <th>所在城市</th>
+            <th>投资类型</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="gradeX" ng-repeat="project in finalReviewProjectList">
+            <td>{{project.pid}}</td>
+            <td>{{project.name}}</td>
+            <td>{{project.contactName}}</td>
+            <td>{{project.startTime | date:"yyyy年MM月"}}</td>
+            <td>{{project.city}}</td>
+            <td>{{investTypeMap[project.investType]}}</td>
+            <td>{{project.notified ? '已通知' : '未通知'}}</td>
+            <td><a href="/#/reviewdetail/{{project.pid}}" target="_blank"><button class="btn btn-default"> 详情 </button></a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div ng-show="viewingTab === 3">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header">备案项目</h1>
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
+        <table datatable="ng" class="table table-striped table-bordered table-hover" id="dataTables-4">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>项目名称</th>
+            <th>项目负责人</th>
+            <th>开始时间</th>
+            <th>所在城市</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="gradeX" ng-repeat="project in formalProjectList">
+            <td>{{project.pid}}</td>
+            <td>{{project.name}}</td>
+            <td>{{project.contactName}}</td>
+            <td>{{project.startTime | date:"yyyy年MM月"}}</td>
+            <td>{{project.city}}</td>
+            <td><a href="/#/formalproject/{{project.pid}}" target="_blank"><button class="btn btn-default"> 详情 </button></a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div ng-show="viewingTab === 4">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header">待观察项目</h1>
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
+        <table datatable="ng" class="table table-striped table-bordered table-hover" id="dataTables-5">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>项目名称</th>
+            <th>项目负责人</th>
+            <th>开始时间</th>
+            <th>所在城市</th>
+            <th>淘汰轮次</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="gradeX" ng-repeat="project in observingProjectList">
+            <td>{{project.pid}}</td>
+            <td>{{project.name}}</td>
+            <td>{{project.contactName}}</td>
+            <td>{{project.startTime | date:"yyyy年MM月"}}</td>
+            <td>{{project.city}}</td>
+            <td>{{project.failedAt}}</td>
+            <td><a href="/#/reviewdetail/{{project.pid}}" target="_blank"><button class="btn btn-default"> 详情 </button></a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div ng-show="viewingTab === 5">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header">垃圾箱项目</h1>
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
+        <table datatable="ng" class="table table-striped table-bordered table-hover" id="dataTables-6">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>项目名称</th>
+            <th>项目负责人</th>
+            <th>开始时间</th>
+            <th>所在城市</th>
+            <th>淘汰轮次</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="gradeX" ng-repeat="project in trashProjectList">
+            <td>{{project.pid}}</td>
+            <td>{{project.name}}</td>
+            <td>{{project.contactName}}</td>
+            <td>{{project.startTime | date:"yyyy年MM月"}}</td>
+            <td>{{project.city}}</td>
+            <td>{{project.failedAt}}</td>
+            <td><a href="/#/reviewdetail/{{project.pid}}" target="_blank"><button class="btn btn-default"> 详情 </button></a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div ng-show="viewingTab === 6">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header">用户管理</h1>
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
+      </div>
+
+    </div>
+    <!-- /#page-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- jQuery -->
+  <script src="../sb_admin_2_dep/bower_components/jquery/dist/jquery.min.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="../sb_admin_2_dep/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <!-- Metis Menu Plugin JavaScript -->
+  <script src="../sb_admin_2_dep/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+  <!-- Custom Theme JavaScript -->
+  <script src="../sb_admin_2_dep/dist/js/sb-admin-2.js"></script>
+
+
+  <script>
+    /*window.g = window.g || {};
+    window.g.dataTableInit = function() {
+
+      window.g.dataTableSettings = {
+        "responsive": true,
+        "oLanguage": {
+            "sInfoEmpty": "没有数据",
+            "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+            "oPaginate": {
+              "sFirst": "首页",
+              "sPrevious": "前一页",
+              "sNext": "后一页",
+              "sLast": "尾页"
+            },
+            "sLengthMenu": "每页显示 _MENU_ 条记录",
+            "sInfo": "当前显示: 第 _START_ 条到第 _END_ 条 / 共 _TOTAL_ 条数据",
+            "sZeroRecords": "抱歉，没有找到符合条件的项目记录...",
+          "sSearch": '搜索关键词: '
+        }
+      };
+
+      $('#dataTables-1').DataTable(window.g.dataTableSettings);
+      $('#dataTables-2').DataTable(window.g.dataTableSettings);
+      $('#dataTables-3').DataTable(window.g.dataTableSettings);
+      $('#dataTables-4').DataTable(window.g.dataTableSettings);
+      $('#dataTables-5').DataTable(window.g.dataTableSettings);
+      $('#dataTables-6').DataTable(window.g.dataTableSettings);
+    }*/
+  </script>
+</div>

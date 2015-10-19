@@ -1,0 +1,284 @@
+<lab-header></lab-header>
+
+<link type="text/css" rel="stylesheet" href="../bower_components/selectize/dist/css/selectize.default.css" />
+<script src="../bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+
+<style type="text/css">
+
+  .intro-words {
+    padding-left: 25px !important;
+  }
+
+  .intro-words strong {
+    color: #222!important;
+    font-size: 2.4em!important;
+  }
+
+  .intro-words p {
+    line-height: 55px;
+  }
+
+  .inner-container {
+    margin: 30px 0;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  }
+
+  .inner-container .intro-words{
+    padding: 38px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .inner-container .intro-words strong{
+    color: #f86f00;
+    font-size: 30px;
+    line-height: 42px;
+    margin-bottom: 10px;
+  }
+  .inner-container .intro-words p{
+    font-size: 16px;
+    line-height: 28px;
+    color: #6d6d6d;
+  }
+  .intro-form{
+    margin: 30px 0;
+  }
+  .upload-btn-group{
+    margin-top: 20px;
+  }
+
+  /* Edited by JoshOY */
+
+  .label-control {
+    color: #555;
+    height: 34px;
+    /*line-height: 34px;*/
+    font-size: 1.04em;
+    width: 16%;
+    padding-left: 40px;
+    overflow: visible;
+  }
+
+  .form-control {
+    width: 70% !important;
+    margin-left: 25px !important;
+  }
+
+  .input-group .form-control {
+    margin-left: 40px !important;
+    width: 55.5% !important;
+  }
+
+  .help-block {
+    margin-left: 25px;
+  }
+
+  span.input-group-btn {
+    float: left;
+    margin-left: 25px;
+  }
+
+  .btn-bigshark-default {
+    float: left;
+    border: #337ab7 1px solid;
+    color: #337ab7;
+    /*border-radius: 4px !important;*/
+  }
+
+  select.form-control {
+    width: 150px !important;
+    float: left;
+  }
+
+  .select-description {
+    float: left;
+    font-size: 1.05em;
+    line-height: 34px;
+    margin-left: 15px;
+    margin-right: 5px;
+  }
+
+  .btn-save-changes {
+    margin-left: 15px;
+  }
+
+  .table-add-attachment {
+    margin-top: 15px;
+  }
+
+  .table-add-attachment-elem {
+    line-height: 51px!important;
+  }
+
+  .table-add-attachment-elem > td {
+    line-height: 51px!important;
+  }
+
+  .background-yellow {
+    background: rgb(252, 246, 208) !important;
+    width: 100%;
+    border-bottom: #eee 1px solid;
+  }
+
+  .selectize-control {
+    width: 70% !important;
+    margin-left: 25px !important;
+  }
+
+</style>
+
+<div class="container">
+  <div class="inner-container">
+    <div class="intro-words">
+      <strong>我的项目</strong>
+      <p>
+        <span style="line-height: 34px;">状态：{{project.status}}</span>
+        <span ng-if="projectStatus === 'DRAFT'">
+          <span style="float: right; margin-right: 45px;"><button class="btn btn-danger" ng-click="deleteProject()">删除项目</button></span>
+          <span style="float: right; margin-right: 15px;"><button class="btn btn-default btn-success" ng-click="submitProject()">提交评审</button></span>
+        </span>
+        <span style="float: right; margin-right: 15px;"><a ng-href="/#/projects"><button class="btn btn-default btn-bigshark-default"><i class="glyphicon glyphicon-arrow-left"></i>&nbsp;返回我的主页</button></a></span>
+      </p>
+    </div>
+
+    <!-- 黄色背景提示部分,仅在状态为草稿时出现 -->
+    <div class="container background-yellow" ng-show="projectStatus === 'DRAFT'">
+        <ol style="padding-top: 25px; padding-bottom: 15px;">
+          <li>该项目是草稿，尚未提交。你可以继续编辑，添加附件或者提交审核。</li>
+          <li>请先了解我们的投资原则。</li>
+          <li>提交审核之后，项目信息不可修改。</li>
+        </ol>
+    </div>
+
+    <form ng-submit="">
+      <div class="form-horizontal intro-form">
+        <div class="form-group">
+          <label for="input1" class="col-sm-2 label-control"><span class="required">* </span>项目名称</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input1" placeholder=""
+                   ng-model="project.name" ng-disabled="projectStatus !== 'DRAFT'">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input2" class="col-sm-2 label-control"><span class="required">* </span>项目负责人姓名</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input2" placeholder=""
+                   ng-model="project.contact_name" ng-disabled="projectStatus !== 'DRAFT'">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input3" class="col-sm-2 label-control">联系邮箱</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input3" placeholder=""
+                   ng-model="project.contact_email" ng-disabled="projectStatus !== 'DRAFT'">
+            <p class="help-block"><span class="required">* </span>请确保邮箱正确，项目进度会以邮件形式通知</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input4" class="col-sm-2 label-control">常用手机号码</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input4" placeholder=""
+                   ng-model="project.contact_phone" ng-disabled="projectStatus !== 'DRAFT'">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 label-control">项目开始时间</label>
+          <div class="col-sm-10">
+              <select class="form-control" ng-model="project.year" ng-options="y for y in years"
+                      ng-disabled="projectStatus !== 'DRAFT'">
+              </select>
+            <span class="select-description">年</span>
+              <select class="form-control" ng-model="project.month" ng-options="m for m in months"
+                      ng-disabled="projectStatus !== 'DRAFT'">
+              </select>
+            <span class="select-description">月</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 label-control">核心团队所在城市</label>
+          <div class="col-sm-10">
+            <select class="form-control" ng-model="project.city"
+                    ng-options="city for city in cities" ng-disabled="projectStatus !== 'DRAFT'">
+            </select>
+            <p class="help-block"><span class="required" style="margin-left: 15px;">* </span>目前仅支持三个城市</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 label-control">项目类型</label>
+          <div class="col-sm-10">
+            <!--<select class="form-control" ng-model="project.type" ng-options="type for type in cities">-->
+            <!--</select>-->
+            <selectize id="select-project-types" ng-model="project.type" ng-disabled="projectStatus !== 'DRAFT'"
+                       options="['']" config="selectizeConfig"></selectize>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 label-control">一句话描述</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="长度不超过100个字"
+                   ng-model="project.description" ng-disabled="projectStatus !== 'DRAFT'">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <a href="#" class="btn btn-primary btn-lg btn-save-changes"
+               ng-click="projectStatus === 'DRAFT' ? updateProject() : null" ng-disabled="projectStatus !== 'DRAFT'">保存修改</a>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <blockquote>
+              <p>
+                <strong>上传附件！</strong>
+                1. 请上传你认为重要的附件<br>2.支持doc/pdf/jpg格式<br>3.附件个数不超过5个，单文件不长个5M
+              </p>
+            </blockquote>
+            <div class="row upload-btn-group" style="margin-left: 0px;">
+
+              <div class="btnGroup" style="width: 310px;">
+                <button class="btn btn-success" ng-file-select ng-file-change="uploadAttachment($files)">
+                  <i class="glyphicon glyphicon-plus"></i>
+                  <span>添加附件</span>
+                </button>
+                <!-- 上传文件时显示当前进度 -->
+                <span>{{uploadInfo}}</span>
+              </div>
+            </div>
+            <table class="table table-add-attachment">
+              <tbody>
+                <!-- 格式:
+                <tr class="table-add-attachment-elem">
+                  <td>"文件名称"</td>
+                  <td><a href="" class="btn btn-danger">删除</a></td>
+                </tr>
+                -->
+                <tr class="table-add-attachment-elem" ng-repeat="file in fileList">
+                  <td><a ng-href="{{getHostUrl() + '/api/project/' + getProjectId() + '/file/' + file.id}}">{{file.name}}</a></td>
+                  <!--<td><a ng-click="spanDownloadAttachmentUrl({{file.id}}, '{{file.name}}')" ng-href="#">{{file.name}}</a></td>-->
+                  <span>
+                    <td><a href="" class="btn btn-danger"
+                           ng-click="projectStatus === 'DRAFT' ? deleteAttachment(file.id) : null">删除</a></td>
+                  </span>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../bower_components/selectize/dist/js/standalone/selectize.min.js"></script>
+<script src="../bower_components/angular-selectize2/dist/selectize.js"></script>
+<script>
+  $('#attachment-upload-btn').click(function() {
+    $('#attachment-upload-input').click();
+  });
+</script>

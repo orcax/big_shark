@@ -1,0 +1,10 @@
+{
+  "contactName": "项目负责人",
+  "contactEmail": "联系邮箱",
+  "contactMobile": "手机号码",
+  "name": "项目名称",
+  "startDate": "项目开始时间",
+  "city": "所在城市",
+  "type": "项目类型，多个字段请自行拼接成字符串",
+  "description": "项目简介"
+}

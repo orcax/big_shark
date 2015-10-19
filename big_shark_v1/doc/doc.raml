@@ -1,0 +1,1511 @@
+#%RAML 0.8
+
+title: 大鲨鱼
+protocols: [ HTTP ]
+baseUri: http://localhost:7080/api
+version: v1
+
+traits:
+  - secured:
+      headers:
+        X-Auth-Token:
+          description: 当前用户token，用于验证权限,从登录返回的header中获取
+          type: string
+          required: true
+          example: "IOC551fea47e4b02dd0ab568b85"
+
+  - login:
+      headers:
+        X-Username:
+          description: 用户名
+          type: string
+          required: true
+        X-Password:
+          description: 密码
+          type: string
+          required: true
+
+  - roleParam:
+      queryParameters:
+        userType:
+          type: string
+          description: 用户角色
+          example: |
+            ADMINISTRATOR,CUSTOMER,MANAGER
+
+schemas:
+  - defaultResponse: !include schema/default_response.json
+  - addResponse: !include schema/add_response.json
+  - projectResponse: !include schema/project_response.json
+  - projectsResponse: !include schema/projects_response.json
+  - projectFilesResponse: !include schema/project_files_response.json
+  - project: !include schema/project.json
+
+/token:
+  description: 用户登录系统相关操作
+  post:
+    description: 普通用户登录
+    is: [login]
+    responses:
+      200:
+        body:
+          application/json:
+            schema: |
+              {
+                "code": "200",
+                "message": "",
+                "messageDetail": null,
+                "data": {
+                  "@id": "1",
+                  "id": 1,
+                  "gender": "MALE",
+                  "account": "test",
+                  "role": "CUSTOMER",
+                  "active": true,
+                  "iconPath": null,
+                  "name": null,
+                  "title": null,
+                  "email": "test",
+                  "mobile": null
+                },
+                "numPerPage": 0,
+                "currPageNum": 0,
+                "totalItemNum": 0,
+                "totalPageNum": 0
+              }
+  delete:
+    description: 登出
+    is: [secured]
+    responses:
+      200:
+        body:
+          application/json:
+            schema: |
+              {
+                "code": "200",
+                "message": "",
+                "messageDetail": null,
+                "data": true,
+                "numPerPage": 0,
+                "currPageNum": 0,
+                "totalItemNum": 0,
+                "totalPageNum": 0
+              }
+
+/account:
+  description: 用户账户相关操作
+  /manager:
+    post:
+      is: [secured, roleParam]
+      description: 新增投资经理
+      body:
+        application/json:
+          example: |
+            {
+              "email": "123456@163.com",
+              "icon": "/file/img/icon/test.jpg",
+              "password": "123456"
+            }
+      responses:
+        200:
+          body:
+            application/json:
+              schema: defaultResponse
+    /list:
+      get:
+        is: [secured, roleParam]
+        description: 投资经理列表
+        body:
+          application/json:
+            example: |
+              {
+                "pageNumber": "1",
+                "pageSize": "20",
+                "isActive": "true"
+              }
+        responses:
+          200:
+            body:
+              application/json:
+                schema: defaultResponse
+
+
+  /captcha:
+    post:
+      is: [secured]
+      description: 发送短信验证码
+      body:
+        application/x-www-form-urlencoded: 
+          formParameters: 
+            leaderMobile: 
+              type: string
+              required: true
+      responses:
+        200:
+          body:
+            application/json:
+              schema: defaultResponse
+
+    /verify:
+      put:
+        is: [secured]
+        description: 验证短信验证码是否正确
+        body:
+          application/x-www-form-urlencoded: 
+            formParameters: 
+              leaderMobile: 
+                type: string
+                required: true
+              code: 
+                type: string
+                required: true
+        responses:
+          200:
+            body:
+              application/json:
+                schema: |
+                  {
+                    "code": "200",
+                    "message": "",
+                    "messageDetail": null,
+                    "data": true,
+                    "numPerPage": 0,
+                    "currPageNum": 0,
+                    "totalItemNum": 0,
+                    "totalPageNum": 0
+                  }
+      
+  /icon:
+    put:
+      description: 更新用户头像(所有用户)
+      is: [secured]
+      body: 
+        application/form-data:
+          formParameters:
+            icon:
+              type: file
+              description: 头像
+      responses:
+        200:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": "200",
+                  "message": "",
+                  "messageDetail": null,
+                  "data": "/file/img/icon/test.jpg",
+                  "numPerPage": 0,
+                  "currPageNum": 0,
+                  "totalItemNum": 0,
+                  "totalPageNum": 0
+                }
+  /me:
+    /password:
+      put:
+        description: 修改密码
+        is: [secured]
+        body:
+          application/x-www-form-urlencoded: 
+            formParameters: 
+              oldPassword: 
+                type: string
+                required: true
+              newPassword: 
+                type: string
+                required: true
+    /forget:
+      post:
+        description: 忘记密码请求(邮箱验证)
+        body:
+          application/x-www-form-urlencoded: 
+            formParameters: 
+              email: 
+                type: string
+                required: true
+        responses:
+          200:
+            body:
+              application/json:
+                schema: |
+                  {
+                    "code": "200",
+                    "message": "",
+                    "messageDetail": null,
+                    "data": true,
+                    "numPerPage": 0,
+                    "currPageNum": 0,
+                    "totalItemNum": 0,
+                    "totalPageNum": 0
+                  }
+    /profile:
+      put:
+        is: [secured]
+        description: 更新用户信息
+        queryParameters:
+          mobile:
+            type: string
+          gender:
+            type: string
+            description: 性别
+            example: |
+              MALE
+          email:
+            type: string
+            description: email
+          name:
+            type: string
+            description: nickName
+      get:
+        is: [secured]
+        description: 获取当前用户信息
+        responses:
+          200:
+            body:
+              application/json:
+                schema: |
+                  {
+                    "code": "200",
+                    "message": "",
+                    "messageDetail": null,
+                    "data": {
+                      "@id": "1",
+                      "id": 1,
+                      "gender": "MALE",
+                      "account": "test",
+                      "role": "CUSTOMER",
+                      "active": true,
+                      "iconPath": "/file/upload/icon/icon.jpg",
+                      "name": null,
+                      "title": null,
+                      "email": "test",
+                      "mobile": null
+                    },
+                    "numPerPage": 0,
+                    "currPageNum": 0,
+                    "totalItemNum": 0,
+                    "totalPageNum": 0
+                  }
+
+  /{accountId}:
+    /profile:
+      put:
+        is: [secured, roleParam]
+        queryParameters:
+          mobile:
+            type: string
+          gender:
+            type: string
+            description: 性别
+            example: |
+              MALE
+          email:
+            type: string
+            description: email
+          name:
+            type: string
+            description: nickName
+        responses:
+          200:
+            body:
+              application/json:
+                schema: |
+                  {
+                    "code": "200",
+                    "message": "",
+                    "messageDetail": null,
+                    "data": true,
+                    "numPerPage": 0,
+                    "currPageNum": 0,
+                    "totalItemNum": 0,
+                    "totalPageNum": 0
+                  }
+
+  /customer:
+    post:
+      description: 普通用户注册
+      body:
+        application/json:
+          example: |
+            {
+             "account": "yiliang1g@foxmail.com",
+             "password": "abc123abc123",
+             "gender": "MALE"
+             "name":"xxx"
+            }
+      responses:
+          200:
+            body:
+              application/json:
+                schema: |
+                  {
+                    "code": "200",
+                    "message": "",
+                    "messageDetail": null,
+                    "data": {
+                      "@id": "1",
+                      "id": 1,
+                      "gender": "MALE",
+                      "account": "test",
+                      "role": "CUSTOMER",
+                      "active": true,
+                      "iconPath": null,
+                      "name": null,
+                      "title": null,
+                      "email": "test",
+                      "mobile": null
+                    },
+                    "numPerPage": 0,
+                    "currPageNum": 0,
+                    "totalItemNum": 0,
+                    "totalPageNum": 0
+                  }
+
+  /verify:
+    description: 验证
+    /email:
+      put:
+        description: |
+          验证邮箱是否存在
+        queryParameters:
+          email:
+            type: string
+            required: true
+        responses:
+          200:
+            body:
+              application/json:
+                schema: |
+                  {
+                    "code": "200",
+                    "message": "",
+                    "messageDetail": null,
+                    "data": true,
+                    "numPerPage": 0,
+                    "currPageNum": 0,
+                    "totalItemNum": 0,
+                    "totalPageNum": 0
+                  }
+
+
+
+/project:
+  description: 项目相关操作
+  is: [secured]
+  get:
+    description: 获取当前用户的所有项目的信息。role = [CUSTOMER]
+    responses:
+      200:
+        body:
+          application/json:
+            schema: projectsResponse
+
+  post:
+    description: 创建一个新的项目。role = [CUSTOMER]
+    body:
+      application/json:
+        schema: project
+        example: |
+          {
+            "contactName": "张三",
+            "contactEmail": "zhangsan@gmail.com",
+            "contactMobile": "123456789012",
+            "name": "项目名称",
+            "startDate": "2015-1-1",
+            "city": "上海",
+            "type": "社交,教育",
+            "description": "一个测试项目"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: addResponse
+
+  /{pid}:
+    is: [secured]
+    uriParameters:
+      pid:
+        description: 项目ID
+        type: integer
+    get:
+      description: 读取项目的基本信息。
+      responses:
+        200:
+          body:
+            application/json:
+              schema: projectResponse
+    put:
+      description: 更新项目的基本信息。phase = [DRAFT], role = [CUSTOMER]
+      body:
+        application/json: 
+          schema: project
+          example: |
+            {
+              "contactName": "张三",
+              "contactEmail": "zhangsan@gmail.com",
+              "contactMobile": "123456789012",
+              "name": "项目名称",
+              "startDate": "2015-1-1",
+              "city": "上海",
+              "type": "社交,教育",
+              "description": "一个测试项目"
+            }
+      responses:
+        200:
+          body:
+            application/json:
+              schema: defaultResponse
+    delete:
+      description: 删除项目。phase = [DRAFT], role = [CUSTOMER]
+      responses:
+        200:
+          body:
+            application/json:
+              schema: defaultResponse
+
+    /file:
+      is: [secured]
+      get:
+        description: 获得项目的所有附件信息。
+        responses:
+          200:
+            body:
+              application/json:
+                schema: projectFilesResponse
+      post:
+        description: 上传新附件。phase = [DRAFT]。role = [CUSTOMER]
+        body:
+          application/form-data:
+            formParameters:
+              file:
+                type: file
+                description: 仅支持JPG, PDF, DOC三种类型的文件
+                required: true
+        responses:
+          200:
+            body:
+              application/json:
+                schema: addResponse
+
+      /{fid}:
+        is: [secured]
+        uriParameters:
+          fid:
+            type: integer
+            description: 项目附件的ID
+        get:
+          description: 下载附件。
+        delete:
+          description: 删除附件。phase = [DRAFT]。role = [CUSTOMER]
+          responses:
+            200:
+              body:
+                application/json:
+                  schema: defaultResponse
+
+    /submit:
+      is: [secured]
+      post:
+        description: 提交项目进入海选阶段。phase = [DRAFT], role = [CUSTOMER]
+        responses:
+          200:
+            body:
+              application/json:
+                schema: defaultResponse
+
+    /phase/{phase}:
+      is: [secured]
+      uriParameters:
+        phase:
+          type: string
+          enum: [AUDITION, FIRST_REVIEW, FINAL_REVIEW, ACCEPTED]
+          description: 项目下个阶段，且不能是DRAFT。
+      post:
+        description: 更改项目所在的阶段。role = [MANAGER]
+        body:
+          application/form-data:
+            formParameters:
+              investType:
+                type: string
+                enum: [SEED, ANGEL]
+                description: 投资类型，当且仅当下个阶段为FINAL_REVIEW时才必须提供该参数
+        responses:
+          200:
+            body:
+              application/json:
+                schema: defaultResponse
+
+    /status/{status}:
+      is: [secured]
+      uriParameters:
+        status:
+          type: string
+          enum: [NORMAL, WATCHING, RUBBISH]
+          description: 项目的状态
+      post:
+        description: 更改项目当前状态。role = [MANAGER], phase = [AUDITION, FIRST_REVIEW, FINAL_REVIEW]
+        responses:
+          200:
+            body:
+              application/json:
+                schema: defaultResponse
+
+  /search:
+    is: [secured]
+    get:
+      description: 根据条件搜索项目。role = [MANAGER]
+      queryParameters:
+        phase:
+          type: string
+          enum: [AUDITION, FIRST_REVIEW, FINAL_REVIEW, ACCEPTED]
+        status:
+          type: string
+          enum: [NORMAL, WATCHING, RUBBISH]
+        city: 
+          type: string
+          description: 核心团队所在城市
+        name:
+          type: string
+          description: 项目名称或名称的关键词
+        notified:
+          type: boolean
+          example: true or false
+        investType:
+          type: string
+          enum: [SEED, ANGEL]
+        pageSize:
+          type: integer
+          description: 每页数量
+        pageNumber:
+          type: integer
+          description: 第几页
+      responses:
+        200:
+          body:
+            application/json:
+              schema: projectsResponse
+
+  /notify:
+    is: [secured]
+    post:
+      description: 批量将项目设置为“已通知”。role = [MANAGER]
+      body:
+        application/form-data:
+          formParameters:
+            projectIds:
+              type: string
+              description: 项目ID的列表，以逗号隔开
+              example: ID分别为1，2，3，4的四个项目列表可以写成：1,2,3,4
+      responses:
+        200:
+          body:
+            application/json:
+              schema: defaultResponse
+
+/review:
+  description: 每阶段评审的相关操作。
+  is: [secured]
+  get:
+    description: 列出项目的评审信息（仅支持海选、初审、终审）。
+    queryParameters:
+      projectId:
+        type: integer
+        required: true
+        description: 项目ID
+      phases:
+        type: string
+        enum: [AUDITION, FIRST_REVIEW, FINAL_REVIEW]
+        description: 可选多个阶段，用逗号隔开
+        required: true
+    responses:
+      200:
+        body:
+          application/json:
+            schema: |
+              {
+                "code": "200",
+                "message": "",
+                "messageDetail": null,
+                "data": {
+                  "AUDITION": [
+                    {
+                      "id": 1,
+                      "phase": "AUDITION",
+                      "createTime": 1439370598000,
+                      "managerName": "M1",
+                      "liked": true
+                    }
+                  ],
+                  "FIRST_REVIEW": [
+                    {
+                      "id": 2,
+                      "phase": "FIRST_REVIEW",
+                      "createTime": 1439370727000,
+                      "inclined": true,
+                      "managerName": "M2",
+                      "content": "一个不错的项目！"
+                    }
+                  ],
+                  "FINAL_REVIEW": [
+                    {
+                      "id": 3,
+                      "phase": "FINAL_REVIEW",
+                      "createTime": 1439370830000,
+                      "inclined": true,
+                      "investAmount": "29w",
+                      "managerName": "M2",
+                      "content": "一个不错的项目！",
+                      "invested": true,
+                      "assessedValue": "10w"
+                    }
+                  ]
+                },
+                "numPerPage": 0,
+                "currPageNum": 0,
+                "totalItemNum": 0,
+                "totalPageNum": 0
+              }
+  post:
+    description: 添加评审信息（支持海选、初审、终审、正式入选）。role = [MANAGER]
+    body:
+      application/json:
+        schema: |
+          {
+            "projectId": "项目ID | integer | required",
+            "phase": "项目阶段 | one of AUDITION, FIRST_REVIEW, FINAL_REVIEW, ACCEPTED | required",
+            "liked": "点赞 | true/false | phase=AUDITION",
+            "managerName": "投资经理姓名/评估人姓名 | string | phase=FIRST_REVIEW/FINAL_REVIEW/ACCEPTED",
+            "content": "评价内容 | string | phase=FIRST_REVIEW/FINAL_REVIEW/ACCEPTED",
+            "inclined": "意向 | true/false | phase=FIRST_REVIEW/FINAL_REVIEW",
+            "assessedValue": "最多投资额 | string | phase=FINAL_REVIEW",
+            "investAmount": "最高估值 | string | phase=FINAL_REVIEW",
+            "invested": "是否领投资 | true/false | phase=FINAL_REVIEW"
+          }
+        example: |
+          // 海选点赞的例子：
+          {
+            "projectId": 4,
+            "phase": "AUDITION",
+            "liked": true
+          }
+          // 初审评审信息的例子：
+          {
+            "projectId": 4,
+            "phase": "FIRST_REVIEW",
+            "managerName": "M2",
+            "content": "一个不错的项目！",
+            "inclined": true
+          }
+          // 终审评审信息的例子：
+          {
+            "projectId": 4,
+            "phase": "FINAL_REVIEW",
+            "managerName": "M2",
+            "content": "一个不错的项目！",
+            "inclined": true,
+            "assessedValue": "10w",
+            "investAmount": "29w",
+            "invested": true
+          }
+          // 正式入选后的项目评估的例子：
+          {
+            "projectId": 4,
+            "phase": "ACCEPTED",
+            "managerName": "M2",
+            "content": "一个不错的项目！"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: addResponse
+
+  /{rid}:
+    is: [secured]
+    uriParameters:
+      rid:
+        type: integer
+        required: true
+        description: 评审ID
+    put:
+      description: 更新评审信息。role = [MANAGER]
+      body:
+        application/json:
+          schema: |
+            {
+              "liked": "点赞 | true/false | phase=AUDITION",
+              "managerName": "投资经理姓名/评估人姓名 | string | phase=FIRST_REVIEW/FINAL_REVIEW/ACCEPTED",
+              "content": "评价内容 | string | phase=FIRST_REVIEW/FINAL_REVIEW/ACCEPTED",
+              "inclined": "意向 | true/false | phase=FIRST_REVIEW/FINAL_REVIEW",
+              "assessedValue": "最多投资额 | string | phase=FINAL_REVIEW",
+              "investAmount": "最高估值 | string | phase=FINAL_REVIEW",
+              "invested": "是否领投资 | true/false | phase=FINAL_REVIEW"
+            }
+          example: |
+            海选点赞：
+            {
+              "liked": true
+            }
+            初审评审信息：
+            {
+              "managerName": "M2",
+              "content": "一个不错的项目！",
+              "inclined": true
+            }
+            终审评审信息：
+            {
+              "managerName": "M2",
+              "content": "一个不错的项目！",
+              "inclined": true,
+              "assessedValue": "10w",
+              "investAmount": "29w",
+              "invested": true
+            }
+            正式入选后的项目评估：
+            {
+              "managerName": "M2",
+              "content": "一个不错的项目！"
+            }
+      responses:
+        200:
+          body:
+            application/json:
+              schema: defaultResponse
+  
+  /evaluate:
+    is: [secured]
+    get:
+      description: 列出正式项目的评估信息。role = [MANAGER]
+      queryParameters:
+        projectId:
+          description: 项目ID
+          type: integer
+          required: true
+      responses:
+        200:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": "200",
+                  "message": "",
+                  "messageDetail": null,
+                  "data": {
+                    "ACCEPTED": [
+                      {
+                        "phase": "ACCEPTED",
+                        "createTime": 1439370598000,
+                        "managerName": "M1",
+                        "content": "一个不错的项目"
+                      }
+                    ]
+                  },
+                  "numPerPage": 0,
+                  "currPageNum": 0,
+                  "totalItemNum": 0,
+                  "totalPageNum": 0
+                }
+
+/company:
+  description: 正式项目中公司信息的相关操作。phase = [ACCEPTED]
+  is: [secured]
+  get:
+    description: 读取项目对应的公司信息。
+    queryParameters:
+      projectId:
+        type: integer
+        required: true
+        description: 项目ID
+    responses:
+      200:
+        body:
+          application/json:
+            schema: |
+              {
+                "code": "200",
+                "message": "",
+                "messageDetail": null,
+                "data": {
+                  "@id": "1",
+                  "id": 3,
+                  "projectId": 6,
+                  "name": "Google",
+                  "registerType": "NATIONAL",
+                  "registerAddress": "aaaaa",
+                  "registerTime": 1438387200000,
+                  "registerCapital": "10w",
+                  "legalPerson": "Mr X",
+                  "legalMobile": "12314124124",
+                  "legalEmail": "awfd@asdf",
+                  "officeAddress": "wefjawlefj"
+                },
+                "numPerPage": 0,
+                "currPageNum": 0,
+                "totalItemNum": 0,
+                "totalPageNum": 0
+              }
+  post:
+    description: 添加项目对应的公司信息。每个项目对应唯一的公司信息，所以同一个项目不能添加多个公司记录。
+    body:
+      application/json:
+        schema: |
+          {
+            "projectId": "项目ID | integer | required",
+            "name": "公司名称 | string | optional",
+            "registerType": "公司注册类型 | one of NATIONAL, SINO_FOREIGN, OTHER | optional",
+            "registerAddress": "注册地址 | string | optional",
+            "registerTime": "注册时间 | date | optional",
+            "registerCapital": "注册资本 | string | optional",
+            "legalPerson": "法定代表人 | string | optional",
+            "legalMobile": "法定代表人手机号码 | string | optional",
+            "legalEmail": "法定代表人电子邮箱 | string | optional",
+            "officeAddress": "办公地址 | string | optional"
+          }
+        example: |
+          {
+            "projectId": 6,
+            "name": "Google",
+            "registerType": "NATIONAL",
+            "registerAddress": "aaaaa",
+            "registerTime": "2015-8-1",
+            "registerCapital": "10w",
+            "legalPerson": "Mr X",
+            "legalMobile": "12314124124",
+            "legalEmail": "awfd@asdf",
+            "officeAddress": "wefjawlefj"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: addResponse
+
+  /{cid}:
+    is: [secured]
+    uriParameters: 
+      cid:
+        type: integer
+        required: true
+        description: 公司ID
+    put:
+      description: 更新公司信息。
+      body:
+        application/json:
+          schema: |
+            {
+              "name": "公司名称 | string | optional",
+              "registerType": "公司注册类型 | one of NATIONAL, SINO_FOREIGN, OTHER | optional",
+              "registerAddress": "注册地址 | string | optional",
+              "registerTime": "注册时间 | date | optional",
+              "registerCapital": "注册资本 | string | optional",
+              "legalPerson": "法定代表人 | string | optional",
+              "legalMobile": "法定代表人手机号码 | string | optional",
+              "legalEmail": "法定代表人电子邮箱 | string | optional",
+              "officeAddress": "办公地址 | string | optional"
+            }
+          example: |
+            {
+              "name": "Google",
+              "registerType": "NATIONAL",
+              "registerAddress": "aaaaa",
+              "registerTime": "2015-8-1",
+              "registerCapital": "10w",
+              "legalPerson": "Mr X",
+              "legalMobile": "12314124124",
+              "legalEmail": "awfd@asdf",
+              "officeAddress": "wefjawlefj"
+            }
+      responses:
+        200:
+          body:
+            application/json:
+              schema: addResponse
+
+/equity:
+  description: 正式项目中股权变更信息的相关操作。phase = [ACCEPTED]
+  is: [secured]
+  get:
+    description: 列出正式项目的股权变更信息。
+    queryParameters:
+      projectId:
+        type: integer
+        required: true
+        description: 项目ID
+    responses:
+      200:
+        body:
+          application/json:
+            schema: |
+              {
+                "code": "200",
+                "message": "",
+                "messageDetail": null,
+                "data": [
+                  {
+                    "@id": "1",
+                    "id": 1,
+                    "projectId": 3,
+                    "investor": "MR ABC",
+                    "investTime": 1430438400000,
+                    "investType": "ORIGINAL",
+                    "investCurrency": "USD",
+                    "investAmount": "20w",
+                    "estimateAmount": "20w",
+                    "sharePercentage": "4%",
+                    "board": "Google"
+                  }
+                ],
+                "numPerPage": 0,
+                "currPageNum": 0,
+                "totalItemNum": 0,
+                "totalPageNum": 0
+              }
+  post:
+    description: 添加股权信息。
+    body:
+      application/json:
+        schema: |
+          {
+            "projectId": "项目ID | integer | required",
+            "investor": "投资人/投资机构 | integer | optional",
+            "investTime": "注册时间 | date | optional",
+            "investType": "投资类型 | one of ORIGINAL, ADDITIONAL, TRANSFER | optional",
+            "investCurrency": "投资币种 | one of RMB, USD | optional",
+            "investAmount": "投资金额 | string | optional",
+            "estimateAmount": "投后估值 | string | optional",
+            "sharePercentage": "占股比例 | string | optional",
+            "board": "董事会相关 | string | optional"
+          }
+        example: |
+          {
+            "projectId": "3",
+            "investor": "MR ABC",
+            "investTime": "2014-1-1",
+            "investType": "ORIGINAL",
+            "investCurrency": "RMB",
+            "investAmount": "20w",
+            "estimateAmount": "20w",
+            "sharePercentage": "4%",
+            "board": "Google"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: addResponse
+
+  /{eid}:
+    is: [secured]
+    uriParameters:
+      eid:
+        type: integer
+        required: true
+        description: 股权ID
+    put:
+      description: 编辑股权信息。phase = [ACCEPTED]
+      body:
+        application/json:
+          schema: |
+            {
+              "investor": "投资人/投资机构 | integer | optional",
+              "investTime": "注册时间 | date | optional",
+              "investType": "投资类型 | one of ORIGINAL, ADDITIONAL, TRANSFER | optional",
+              "investCurrency": "投资币种 | one of RMB, USD | optional",
+              "investAmount": "投资金额 | string | optional",
+              "estimateAmount": "投后估值 | string | optional",
+              "sharePercentage": "占股比例 | string | optional",
+              "board": "董事会相关 | string | optional"
+            }
+          example: |
+            {
+              "projectId": "3",
+              "investor": "MR ABC",
+              "investTime": "2014-1-1",
+              "investType": "ORIGINAL",
+              "investCurrency": "RMB",
+              "investAmount": "20w",
+              "estimateAmount": "20w",
+              "sharePercentage": "4%",
+              "board": "Google"
+            }
+      responses:
+        200:
+          body:
+            application/json:
+              schema: defaultResponse
+            
+    delete:
+      description: 删除股权信息，同时删除关联的附件信息。
+      responses:
+        200:
+          body:
+            application/json:
+              schema: defaultResponse
+
+    /file:
+      is: [secured]
+      get:
+        description: 列出股权的附件信息。
+        responses:
+          200:
+            body:
+              application/json:
+                schema: |
+                  {
+                    "code": "200",
+                    "message": "",
+                    "messageDetail": null,
+                    "data": [
+                      {
+                        "@id": "1",
+                        "id": 4,
+                        "equityId": 1,
+                        "type": "BIZ_LICENSE",
+                        "name": "travel",
+                        "kind": "PDF",
+                        "size": 4080
+                      }
+                    ],
+                    "numPerPage": 0,
+                    "currPageNum": 0,
+                    "totalItemNum": 0,
+                    "totalPageNum": 0
+                  }
+
+      post:
+        description: 上传股权的新附件，每种类型的附件仅保存一份，所以对于相同类型的附件来说，新附件会覆盖旧的附件。
+        body:
+          application/form-data:
+            formParameters:
+              type:
+                type: string
+                enum: [BIZ_LICENSE, ORG_CODE_CERT, TAX_REG_CERT, CORP_ARTICLE, SHAREHOLDER_RESOLUTE, INVEST_AGREE, AUDIT_REPORT]
+                required: true
+                description: 附件类型
+              file:
+                type: file
+                description: 要上传的文件
+                required: true
+        responses:
+          200:
+            body:
+              application/json:
+                schema: addResponse
+
+      /{fid}:
+        uriParameters:
+          fid:
+            type: integer
+            description: 股权附件的ID
+        get:
+          description: 下载附件
+        delete:
+          description: 删除附件
+          responses:
+            200:
+              body:
+                application/json:
+                  schema: defaultResponse
+
+/founder:
+  description: 正式项目中创始人信息的相关操作。phase = [ACCEPTED]
+  is: [secured]
+  get:
+    description: 列出项目的创始人信息。
+    queryParameters:
+      projectId:
+        type: integer
+        required: true
+        description: 项目ID
+    responses:
+      200:
+        body:
+          application/json:
+            schema: |
+              {
+                "code": "200",
+                "message": "",
+                "messageDetail": null,
+                "data": [
+                  {
+                    "@id": "1",
+                    "id": 3,
+                    "projectId": 3,
+                    "name": "Mr Y",
+                    "mobile": "123412521521",
+                    "wechat": "mry",
+                    "email": "abc@xyz",
+                    "idNumber": "12312412412521412412412",
+                    "position": "CEO"
+                  }
+                ],
+                "numPerPage": 0,
+                "currPageNum": 0,
+                "totalItemNum": 0,
+                "totalPageNum": 0
+              }
+  post:
+    description: 添加创始人
+    body:
+      application/json:
+        schema: |
+          {
+            "projectId": "项目ID | integer | required",
+            "name": "创始人姓名 | string | optional",
+            "mobile": "手机号 | string | optional",
+            "wechat": "微信号 | string | optional",
+            "email": "电子邮箱 | string | optional",
+            "idNumber": "身份证/护照号码 | string | optional",
+            "position": "目前职位 | string | optional"
+          }
+        example: |
+          {
+            "projectId": "3",
+            "name": "Mr Y",
+            "mobile": "123412521521",
+            "wechat": "mry",
+            "email": "abc@xyz",
+            "idNumber": "12312412412521412412412",
+            "position": "CEO"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: addResponse
+
+  /{fid}:
+    is: [secured]
+    uriParameters:
+      fid:
+        type: integer
+        required: true
+        description: 创始人ID
+    get:
+      description: 读取创始人信息。
+      responses:
+        200:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": "200",
+                  "message": "",
+                  "messageDetail": null,
+                  "data": {
+                    "@id": "1",
+                    "id": 3,
+                    "projectId": 3,
+                    "name": "Mr Y",
+                    "mobile": "123412521521",
+                    "wechat": "mry",
+                    "email": "abc@xyz",
+                    "idNumber": "12312412412521412412412",
+                    "position": "CEO"
+                  },
+                  "numPerPage": 0,
+                  "currPageNum": 0,
+                  "totalItemNum": 0,
+                  "totalPageNum": 0
+                }
+    put:
+      description: 更新创始人信息
+      body:
+        application/json:
+          schema: |
+            {
+              "name": "创始人姓名 | string | optional",
+              "mobile": "手机号 | string | optional",
+              "wechat": "微信号 | string | optional",
+              "email": "电子邮箱 | string | optional",
+              "idNumber": "身份证/护照号码 | string | optional",
+              "position": "目前职位 | string | optional"
+            }
+          example: |
+            {
+              "name": "Mr Y",
+              "mobile": "123412521521",
+              "wechat": "mry",
+              "email": "abc@xyz",
+              "idNumber": "12312412412521412412412",
+              "position": "CEO"
+            }
+      responses:
+        200:
+          body:
+            application/json:
+              schema: defaultResponse
+    delete:
+      description: 删除创始人信息，同时删除关联的工作和教育信息。
+      responses:
+        200:
+          body:
+            application/json:
+              schema: defaultResponse
+
+    /work:
+      is: [secured]
+      get:
+        description: 列出该创始人的工作信息。
+        responses:
+          200:
+            body:
+              application/json:
+                schema: |
+                  {
+                    "code": "200",
+                    "message": "",
+                    "messageDetail": null,
+                    "data": [
+                      {
+                        "@id": "1",
+                        "id": 1,
+                        "founderId": 1,
+                        "company": "Google",
+                        "position": "CFO",
+                        "startDate": "2013-1-1",
+                        "endDate": "至今"
+                      }
+                    ],
+                    "numPerPage": 0,
+                    "currPageNum": 0,
+                    "totalItemNum": 0,
+                    "totalPageNum": 0
+                  }
+      post:
+        description: 添加工作经历。
+        body:
+          application/json:
+            schema: |
+              {
+                "company": "工作单位 | string | optional",
+                "position": "职位 | string | optional",
+                "startDate": "开始时间 | string | optional",
+                "endDate": "结束时间 | string | optional"
+              }
+            example: |
+              {
+                "company": "Baidu",
+                "position": "CEO",
+                "startDate": "2015-1-1",
+                "endDate": "至今"
+              }
+        responses:
+          200:
+            body:
+              application/json:
+                schema: addResponse
+      
+      /{wid}:
+        is: [secured]
+        uriParameters: 
+          wid:
+            type: integer
+            required: true
+            description: 工作ID
+        put:
+          description: 更新工作经历。
+          body:
+            application/json:
+              schema: |
+                {
+                  "company": "工作单位 | string | optional",
+                  "position": "职位 | string | optional",
+                  "startDate": "开始时间 | string | optional",
+                  "endDate": "结束时间 | string | optional"
+                }
+              example: |
+                {
+                  "company": "Baidu",
+                  "position": "CEO",
+                  "startDate": "2015-1-1",
+                  "endDate": "至今"
+                }
+          responses:
+            200:
+              body:
+                application/json:
+                  schema: defaultResponse
+        delete:
+          description: 删除工作经历。
+          responses:
+            200:
+              body:
+                application/json:
+                  schema: defaultResponse
+
+    /edu:
+      is: [secured]
+      get:
+        description: 列出该创始人的教育信息。
+        responses:
+          200:
+            body:
+              application/json:
+                schema: |
+                  {
+                    "code": "200",
+                    "message": "",
+                    "messageDetail": null,
+                    "data": [
+                      {
+                        "@id": "1",
+                        "id": 1,
+                        "founderId": 1,
+                        "college": "Tongji",
+                        "major": "CS",
+                        "startDate": "2013-1-1",
+                        "endDate": "至今"
+                      }
+                    ],
+                    "numPerPage": 0,
+                    "currPageNum": 0,
+                    "totalItemNum": 0,
+                    "totalPageNum": 0
+                  }
+      post:
+        description: 添加教育信息。
+        body:
+          application/json:
+            schema: |
+              {
+                "college": "毕业院系 | string | optional",
+                "major": "专业 | string | optional",
+                "startDate": "开始时间 | string | optional",
+                "endDate": "结束时间 | string | optional"
+              }
+            example: |
+              {
+                "college": "Tongji",
+                "major": "CS",
+                "startDate": "2015-1-1",
+                "endDate": "至今"
+              }
+        responses:
+          200:
+            body:
+              application/json:
+                schema: addResponse
+      
+      /{eid}:
+        is: [secured]
+        uriParameters: 
+          eid:
+            type: integer
+            required: true
+            description: 教育ID
+        put:
+          description: 更新教育经历。
+          body:
+            application/json:
+              schema: |
+                {
+                  "college": "毕业院系 | string | optional",
+                  "major": "专业 | string | optional",
+                  "startDate": "开始时间 | string | optional",
+                  "endDate": "结束时间 | string | optional"
+                }
+              example: |
+                {
+                  "college": "Tongji",
+                  "major": "CS",
+                  "startDate": "2015-1-1",
+                  "endDate": "至今"
+                }
+          responses:
+            200:
+              body:
+                application/json:
+                  schema: defaultResponse
+        delete:
+          description: 删除教育经历。
+          responses:
+            200:
+              body:
+                application/json:
+                  schema: defaultResponse
+
+/progress:
+  description: 正式项目中项目进展的相关操作。phase = [ACCEPTED]
+  is: [secured]
+  get:
+    description: 列出正式项目的进展。
+    responses:
+      200:
+        body:
+          application/json:
+            schema: |
+              {
+                "code": "200",
+                "message": "",
+                "messageDetail": null,
+                "data": [
+                  {
+                    "@id": "1",
+                    "id": 1,
+                    "projectId": 3,
+                    "eventType": "VERSION_UPDATE",
+                    "description": "AAAA BBBB CCCC"
+                  }
+                ],
+                "numPerPage": 0,
+                "currPageNum": 0,
+                "totalItemNum": 0,
+                "totalPageNum": 0
+              }
+  post:
+    description: 添加项目进展。
+    body:
+      application/json:
+        schema: |
+          {
+            "projectId": "项目编号 | integer | required",
+            "eventType": "事件类别 | one of VERSION_UPDATE, USER_PROMOTE, MEDIA_COVERAGE, FINANCE_NEGOTIATE, BUSINESS_COOPERATE, CONTEST_AWARD | optional",
+            "description": "事件描述 | string | optional"
+          }
+        example: |
+          {
+            "projectId": 3,
+            "eventType": "VERSION_UPDATE",
+            "description": "afwefjlaf l23j flk23jfl k2j3lf"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: addResponse
+
+  /{pid}:
+    is: [secured]
+    uriParameters: 
+      pid:
+        type: integer
+        required: true
+        description: 进展ID
+    put:
+      description: 更新进展。
+      body:
+        application/json:
+          schema: |
+            {
+              "eventType": "事件类别 | one of VERSION_UPDATE, USER_PROMOTE, MEDIA_COVERAGE, FINANCE_NEGOTIATE, BUSINESS_COOPERATE, CONTEST_AWARD | optional",
+              "description": "事件描述 | string | optional"
+            }
+          example: |
+            {
+              "eventType": "VERSION_UPDATE",
+              "description": "afwefjlaf l23j flk23jfl k2j3lf"
+            }
+      responses:
+        200:
+          body:
+            application/json:
+              schema: defaultResponse
+    delete:
+      description: 删除进展。
+      responses:
+        200:
+          body:
+            application/json:
+              schema: defaultResponse

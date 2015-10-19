@@ -1,0 +1,1292 @@
+<!DOCTYPE HTML><html><head><title>大鲨鱼 API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/kevinrenskers/raml2html 2.0.2"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+        $('.page-header pre code, .top-resource-description pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+
+        $('[data-toggle]').click(function() {
+          var selector = $(this).data('target') + ' pre code';
+          $(selector).each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
+
+        // open modal on hashes like #_action_get
+        $(window).bind('hashchange', function(e) {
+          var anchor_id = document.location.hash.substr(1); //strip #
+          var element = $('#' + anchor_id);
+
+          // do we have such element + is it a modal?  --> show it
+          if (element.length && element.hasClass('modal')) {
+            element.modal('show');
+          }
+        });
+
+        // execute hashchange on first page load
+        $(window).trigger('hashchange');
+
+        // remove url fragment on modal hide
+        $('.modal').on('hidden.bs.modal', function() {
+          if(history && history.replaceState) {
+            history.replaceState({}, '', '#');
+          }
+        });
+      });
+    </script><style>
+      .hljs {
+        background: transparent;
+      }
+      .parent {
+        color: #999;
+      }
+      .list-group-item > .badge {
+        float: none;
+        margin-right: 6px;
+      }
+      .panel-title > .methods {
+        float: right;
+      }
+      .badge {
+        border-radius: 0;
+        text-transform: uppercase;
+        width: 70px;
+        font-weight: normal;
+        color: #f3f3f6;
+        line-height: normal;
+      }
+      .badge_get {
+        background-color: #63a8e2;
+      }
+      .badge_post {
+        background-color: #6cbd7d;
+      }
+      .badge_put {
+        background-color: #22bac4;
+      }
+      .badge_delete {
+        background-color: #d26460;
+      }
+      .badge_patch {
+        background-color: #ccc444;
+      }
+      .list-group, .panel-group {
+        margin-bottom: 0;
+      }
+      .panel-group .panel+.panel-white {
+        margin-top: 0;
+      }
+      .panel-group .panel-white {
+        border-bottom: 1px solid #F5F5F5;
+        border-radius: 0;
+      }
+      .panel-white:last-child {
+        border-bottom-color: white;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .panel-white .panel-heading {
+        background: white;
+      }
+      .tab-pane ul {
+        padding-left: 2em;
+      }
+      .tab-pane h2 {
+        font-size: 1.2em;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ddd;
+      }
+      .tab-pane h3 {
+        font-size: 1.1em;
+      }
+      .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+      }
+      #sidebar {
+        margin-top: 30px;
+        padding-right: 5px;
+        overflow: auto;
+        height: 90%;
+      }
+      .top-resource-description {
+        border-bottom: 1px solid #ddd;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description {
+        border-bottom: 1px solid #fcfcfc;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description p:last-child {
+        margin: 0;
+      }
+      .list-group .badge {
+        float: left;
+      }
+      .method_description {
+        margin-left: 85px;
+      }
+      .method_description p:last-child {
+        margin: 0;
+      }
+      .list-group-item {
+        cursor: pointer;
+      }
+      .list-group-item:hover {
+        background-color: #f5f5f5;
+      }
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>大鲨鱼 API documentation <small>version v1</small></h1><p>http://localhost:7080/api</p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="token" class="panel-title">/token</h3></div><div class="panel-body"><div class="top-resource-description"><p>用户登录系统相关操作</p></div><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_token"><span class="parent"></span>/token</a> <span class="methods"><a href="#token_post"><span class="badge badge_post">post</span></a> <a href="#token_delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_token" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#token_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>普通用户登录</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#token_delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>登出</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="token_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/token</h4></div><div class="modal-body"><div class="alert alert-info"><p>普通用户登录</p></div><ul class="nav nav-tabs"><li class="active"><a href="#token_post_request" data-toggle="tab">Request</a></li><li><a href="#token_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="token_post_request"><h3>Headers</h3><ul><li><strong>X-Username</strong>: <em>required (string)</em><p>用户名</p></li><li><strong>X-Password</strong>: <em>required (string)</em><p>密码</p></li></ul></div><div class="tab-pane" id="token_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": {
+    "@id": "1",
+    "id": 1,
+    "gender": "MALE",
+    "account": "test",
+    "role": "CUSTOMER",
+    "active": true,
+    "iconPath": null,
+    "name": null,
+    "title": null,
+    "email": "test",
+    "mobile": null
+  },
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="token_delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent"></span>/token</h4></div><div class="modal-body"><div class="alert alert-info"><p>登出</p></div><ul class="nav nav-tabs"><li class="active"><a href="#token_delete_request" data-toggle="tab">Request</a></li><li><a href="#token_delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="token_delete_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="token_delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="account" class="panel-title">/account</h3></div><div class="panel-body"><div class="top-resource-description"><p>用户账户相关操作</p></div><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_account_manager"><span class="parent">/account</span>/manager</a> <span class="methods"><a href="#account_manager_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_account_manager" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#account_manager_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>新增投资经理</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="account_manager_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/account</span>/manager</h4></div><div class="modal-body"><div class="alert alert-info"><p>新增投资经理</p></div><ul class="nav nav-tabs"><li class="active"><a href="#account_manager_post_request" data-toggle="tab">Request</a></li><li><a href="#account_manager_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="account_manager_post_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Query Parameters</h3><ul><li><strong>userType</strong>: <em>(string)</em><p>用户角色</p><p><strong>Example</strong>:</p><pre>ADMINISTRATOR,CUSTOMER,MANAGER
+</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "email": "123456@163.com",
+  "icon": "/file/img/icon/test.jpg",
+  "password": "123456"
+}
+</code></pre></div><div class="tab-pane" id="account_manager_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_account_manager_list"><span class="parent">/account/manager</span>/list</a> <span class="methods"><a href="#account_manager_list_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_account_manager_list" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#account_manager_list_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>投资经理列表</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="account_manager_list_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/account/manager</span>/list</h4></div><div class="modal-body"><div class="alert alert-info"><p>投资经理列表</p></div><ul class="nav nav-tabs"><li class="active"><a href="#account_manager_list_get_request" data-toggle="tab">Request</a></li><li><a href="#account_manager_list_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="account_manager_list_get_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Query Parameters</h3><ul><li><strong>userType</strong>: <em>(string)</em><p>用户角色</p><p><strong>Example</strong>:</p><pre>ADMINISTRATOR,CUSTOMER,MANAGER
+</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "pageNumber": "1",
+  "pageSize": "20",
+  "isActive": "true"
+}
+</code></pre></div><div class="tab-pane" id="account_manager_list_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_account_captcha"><span class="parent">/account</span>/captcha</a> <span class="methods"><a href="#account_captcha_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_account_captcha" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#account_captcha_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>发送短信验证码</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="account_captcha_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/account</span>/captcha</h4></div><div class="modal-body"><div class="alert alert-info"><p>发送短信验证码</p></div><ul class="nav nav-tabs"><li class="active"><a href="#account_captcha_post_request" data-toggle="tab">Request</a></li><li><a href="#account_captcha_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="account_captcha_post_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/x-www-form-urlencoded</strong></p><strong>Form Parameters</strong><ul><li><strong>leaderMobile</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="account_captcha_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_account_captcha_verify"><span class="parent">/account/captcha</span>/verify</a> <span class="methods"><a href="#account_captcha_verify_put"><span class="badge badge_put">put</span></a></span></h4></div><div id="panel_account_captcha_verify" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#account_captcha_verify_put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>验证短信验证码是否正确</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="account_captcha_verify_put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/account/captcha</span>/verify</h4></div><div class="modal-body"><div class="alert alert-info"><p>验证短信验证码是否正确</p></div><ul class="nav nav-tabs"><li class="active"><a href="#account_captcha_verify_put_request" data-toggle="tab">Request</a></li><li><a href="#account_captcha_verify_put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="account_captcha_verify_put_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/x-www-form-urlencoded</strong></p><strong>Form Parameters</strong><ul><li><strong>leaderMobile</strong>: <em>required (string)</em></li><li><strong>code</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="account_captcha_verify_put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_account_icon"><span class="parent">/account</span>/icon</a> <span class="methods"><a href="#account_icon_put"><span class="badge badge_put">put</span></a></span></h4></div><div id="panel_account_icon" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#account_icon_put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>更新用户头像(所有用户)</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="account_icon_put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/account</span>/icon</h4></div><div class="modal-body"><div class="alert alert-info"><p>更新用户头像(所有用户)</p></div><ul class="nav nav-tabs"><li class="active"><a href="#account_icon_put_request" data-toggle="tab">Request</a></li><li><a href="#account_icon_put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="account_icon_put_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/form-data</strong></p><strong>Form Parameters</strong><ul><li><strong>icon</strong>: <em>(file)</em><p>头像</p></li></ul></div><div class="tab-pane" id="account_icon_put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": "/file/img/icon/test.jpg",
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_account_me_password"><span class="parent">/account/me</span>/password</a> <span class="methods"><a href="#account_me_password_put"><span class="badge badge_put">put</span></a></span></h4></div><div id="panel_account_me_password" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#account_me_password_put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>修改密码</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="account_me_password_put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/account/me</span>/password</h4></div><div class="modal-body"><div class="alert alert-info"><p>修改密码</p></div><ul class="nav nav-tabs"><li class="active"><a href="#account_me_password_put_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="account_me_password_put_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/x-www-form-urlencoded</strong></p><strong>Form Parameters</strong><ul><li><strong>oldPassword</strong>: <em>required (string)</em></li><li><strong>newPassword</strong>: <em>required (string)</em></li></ul></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_account_me_forget"><span class="parent">/account/me</span>/forget</a> <span class="methods"><a href="#account_me_forget_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_account_me_forget" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#account_me_forget_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>忘记密码请求(邮箱验证)</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="account_me_forget_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/account/me</span>/forget</h4></div><div class="modal-body"><div class="alert alert-info"><p>忘记密码请求(邮箱验证)</p></div><ul class="nav nav-tabs"><li class="active"><a href="#account_me_forget_post_request" data-toggle="tab">Request</a></li><li><a href="#account_me_forget_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="account_me_forget_post_request"><h3>Body</h3><p><strong>Type: application/x-www-form-urlencoded</strong></p><strong>Form Parameters</strong><ul><li><strong>email</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="account_me_forget_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_account_me_profile"><span class="parent">/account/me</span>/profile</a> <span class="methods"><a href="#account_me_profile_put"><span class="badge badge_put">put</span></a> <a href="#account_me_profile_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_account_me_profile" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#account_me_profile_put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>更新用户信息</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#account_me_profile_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>获取当前用户信息</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="account_me_profile_put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/account/me</span>/profile</h4></div><div class="modal-body"><div class="alert alert-info"><p>更新用户信息</p></div><ul class="nav nav-tabs"><li class="active"><a href="#account_me_profile_put_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="account_me_profile_put_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Query Parameters</h3><ul><li><strong>mobile</strong>: <em>(string)</em></li><li><strong>gender</strong>: <em>(string)</em><p>性别</p><p><strong>Example</strong>:</p><pre>MALE
+</pre></li><li><strong>email</strong>: <em>(string)</em><p>email</p></li><li><strong>name</strong>: <em>(string)</em><p>nickName</p></li></ul></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="account_me_profile_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/account/me</span>/profile</h4></div><div class="modal-body"><div class="alert alert-info"><p>获取当前用户信息</p></div><ul class="nav nav-tabs"><li class="active"><a href="#account_me_profile_get_request" data-toggle="tab">Request</a></li><li><a href="#account_me_profile_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="account_me_profile_get_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="account_me_profile_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": {
+    "@id": "1",
+    "id": 1,
+    "gender": "MALE",
+    "account": "test",
+    "role": "CUSTOMER",
+    "active": true,
+    "iconPath": "/file/upload/icon/icon.jpg",
+    "name": null,
+    "title": null,
+    "email": "test",
+    "mobile": null
+  },
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_account__accountId__profile"><span class="parent">/account/{accountId}</span>/profile</a> <span class="methods"><a href="#account__accountId__profile_put"><span class="badge badge_put">put</span></a></span></h4></div><div id="panel_account__accountId__profile" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#account__accountId__profile_put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="account__accountId__profile_put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/account/{accountId}</span>/profile</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#account__accountId__profile_put_request" data-toggle="tab">Request</a></li><li><a href="#account__accountId__profile_put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="account__accountId__profile_put_request"><h3>URI Parameters</h3><ul><li><strong>accountId</strong>: <em>required (string)</em></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Query Parameters</h3><ul><li><strong>userType</strong>: <em>(string)</em><p>用户角色</p><p><strong>Example</strong>:</p><pre>ADMINISTRATOR,CUSTOMER,MANAGER
+</pre></li><li><strong>mobile</strong>: <em>(string)</em></li><li><strong>gender</strong>: <em>(string)</em><p>性别</p><p><strong>Example</strong>:</p><pre>MALE
+</pre></li><li><strong>email</strong>: <em>(string)</em><p>email</p></li><li><strong>name</strong>: <em>(string)</em><p>nickName</p></li></ul></div><div class="tab-pane" id="account__accountId__profile_put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_account_customer"><span class="parent">/account</span>/customer</a> <span class="methods"><a href="#account_customer_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_account_customer" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#account_customer_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>普通用户注册</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="account_customer_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/account</span>/customer</h4></div><div class="modal-body"><div class="alert alert-info"><p>普通用户注册</p></div><ul class="nav nav-tabs"><li class="active"><a href="#account_customer_post_request" data-toggle="tab">Request</a></li><li><a href="#account_customer_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="account_customer_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+ "account": "yiliang1g@foxmail.com",
+ "password": "abc123abc123",
+ "gender": "MALE"
+ "name":"xxx"
+}
+</code></pre></div><div class="tab-pane" id="account_customer_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": {
+    "@id": "1",
+    "id": 1,
+    "gender": "MALE",
+    "account": "test",
+    "role": "CUSTOMER",
+    "active": true,
+    "iconPath": null,
+    "name": null,
+    "title": null,
+    "email": "test",
+    "mobile": null
+  },
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_account_verify"><span class="parent">/account</span>/verify</a> <span class="methods"></span></h4></div><div id="panel_account_verify" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>验证</p></div><div class="list-group"></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_account_verify_email"><span class="parent">/account/verify</span>/email</a> <span class="methods"><a href="#account_verify_email_put"><span class="badge badge_put">put</span></a></span></h4></div><div id="panel_account_verify_email" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#account_verify_email_put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>验证邮箱是否存在</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="account_verify_email_put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/account/verify</span>/email</h4></div><div class="modal-body"><div class="alert alert-info"><p>验证邮箱是否存在</p></div><ul class="nav nav-tabs"><li class="active"><a href="#account_verify_email_put_request" data-toggle="tab">Request</a></li><li><a href="#account_verify_email_put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="account_verify_email_put_request"><h3>Query Parameters</h3><ul><li><strong>email</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="account_verify_email_put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="project" class="panel-title">/project</h3></div><div class="panel-body"><div class="top-resource-description"><p>项目相关操作</p></div><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_project"><span class="parent"></span>/project</a> <span class="methods"><a href="#project_get"><span class="badge badge_get">get</span></a> <a href="#project_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_project" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#project_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>获取当前用户的所有项目的信息。role = [CUSTOMER]</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#project_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>创建一个新的项目。role = [CUSTOMER]</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="project_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/project</h4></div><div class="modal-body"><div class="alert alert-info"><p>获取当前用户的所有项目的信息。role = [CUSTOMER]</p></div><ul class="nav nav-tabs"><li class="active"><a href="#project_get_request" data-toggle="tab">Request</a></li><li><a href="#project_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="project_get_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="project_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": [
+    {
+      "@id": "1",
+      "id": 1,
+      "contactName": "李四",
+      "contactEmail": "lisi@gmail.com",
+      "contactMobile": "213512341234",
+      "name": "项目AA",
+      "startDate": 1422835200000,
+      "city": "Shanghai",
+      "type": "社交,教育",
+      "description": "一个很牛逼的项目！！！",
+      "phase": "DRAFT",
+      "status": "NORMAL",
+      "notified": false,
+      "investType": null
+    },
+    {
+      "@id": "2",
+      "id": 2,
+      "contactName": "张三",
+      "contactEmail": "zhangsan@gmail.com",
+      "contactMobile": "123456789123",
+      "name": "项目BB",
+      "startDate": 1422835200000,
+      "city": "北京",
+      "type": "社交,O2O",
+      "description": "另一个很牛逼的项目！！！",
+      "phase": "FIRST_REVIEW",
+      "status": "WATCHING",
+      "notified": true,
+      "investType": null
+    }
+  ],
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="project_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/project</h4></div><div class="modal-body"><div class="alert alert-info"><p>创建一个新的项目。role = [CUSTOMER]</p></div><ul class="nav nav-tabs"><li class="active"><a href="#project_post_request" data-toggle="tab">Request</a></li><li><a href="#project_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="project_post_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "contactName": "项目负责人",
+  "contactEmail": "联系邮箱",
+  "contactMobile": "手机号码",
+  "name": "项目名称",
+  "startDate": "项目开始时间",
+  "city": "所在城市",
+  "type": "项目类型，多个字段请自行拼接成字符串",
+  "description": "项目简介"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "contactName": "张三",
+  "contactEmail": "zhangsan@gmail.com",
+  "contactMobile": "123456789012",
+  "name": "项目名称",
+  "startDate": "2015-1-1",
+  "city": "上海",
+  "type": "社交,教育",
+  "description": "一个测试项目"
+}
+</code></pre></div><div class="tab-pane" id="project_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": 1,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_project__pid_"><span class="parent">/project</span>/{pid}</a> <span class="methods"><a href="#project__pid__get"><span class="badge badge_get">get</span></a> <a href="#project__pid__put"><span class="badge badge_put">put</span></a> <a href="#project__pid__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_project__pid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#project__pid__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>读取项目的基本信息。</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#project__pid__put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>更新项目的基本信息。phase = [DRAFT], role = [CUSTOMER]</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#project__pid__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>删除项目。phase = [DRAFT], role = [CUSTOMER]</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="project__pid__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/project</span>/{pid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>读取项目的基本信息。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#project__pid__get_request" data-toggle="tab">Request</a></li><li><a href="#project__pid__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="project__pid__get_request"><h3>URI Parameters</h3><ul><li><strong>pid</strong>: <em>required (integer)</em><p>项目ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="project__pid__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": {
+    "@id": "1",
+    "id": 1,
+    "contactName": "李四",
+    "contactEmail": "lisi@gmail.com",
+    "contactMobile": "213512341234",
+    "name": "项目AA",
+    "startDate": 1422835200000,
+    "city": "Shanghai",
+    "type": "社交,教育",
+    "description": "一个很牛逼的项目！！！",
+    "phase": "DRAFT",
+    "status": "NORMAL",
+    "notified": false,
+    "investType": null
+  },
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="project__pid__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/project</span>/{pid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>更新项目的基本信息。phase = [DRAFT], role = [CUSTOMER]</p></div><ul class="nav nav-tabs"><li class="active"><a href="#project__pid__put_request" data-toggle="tab">Request</a></li><li><a href="#project__pid__put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="project__pid__put_request"><h3>URI Parameters</h3><ul><li><strong>pid</strong>: <em>required (integer)</em><p>项目ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "contactName": "项目负责人",
+  "contactEmail": "联系邮箱",
+  "contactMobile": "手机号码",
+  "name": "项目名称",
+  "startDate": "项目开始时间",
+  "city": "所在城市",
+  "type": "项目类型，多个字段请自行拼接成字符串",
+  "description": "项目简介"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "contactName": "张三",
+  "contactEmail": "zhangsan@gmail.com",
+  "contactMobile": "123456789012",
+  "name": "项目名称",
+  "startDate": "2015-1-1",
+  "city": "上海",
+  "type": "社交,教育",
+  "description": "一个测试项目"
+}
+</code></pre></div><div class="tab-pane" id="project__pid__put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="project__pid__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/project</span>/{pid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>删除项目。phase = [DRAFT], role = [CUSTOMER]</p></div><ul class="nav nav-tabs"><li class="active"><a href="#project__pid__delete_request" data-toggle="tab">Request</a></li><li><a href="#project__pid__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="project__pid__delete_request"><h3>URI Parameters</h3><ul><li><strong>pid</strong>: <em>required (integer)</em><p>项目ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="project__pid__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_project__pid__file"><span class="parent">/project/{pid}</span>/file</a> <span class="methods"><a href="#project__pid__file_get"><span class="badge badge_get">get</span></a> <a href="#project__pid__file_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_project__pid__file" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#project__pid__file_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>获得项目的所有附件信息。</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#project__pid__file_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>上传新附件。phase = [DRAFT]。role = [CUSTOMER]</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="project__pid__file_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/project/{pid}</span>/file</h4></div><div class="modal-body"><div class="alert alert-info"><p>获得项目的所有附件信息。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#project__pid__file_get_request" data-toggle="tab">Request</a></li><li><a href="#project__pid__file_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="project__pid__file_get_request"><h3>URI Parameters</h3><ul><li><strong>pid</strong>: <em>required (integer)</em><p>项目ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="project__pid__file_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+    "message": "",
+    "messageDetail": null,
+    "data": [
+      {
+        "@id": "1",
+        "id": 3,
+        "projectId": 1,
+        "name": "从头到尾彻底理解KMP",
+        "kind": "PDF",
+        "size": 4819184
+      }, 
+      {
+        "@id": "2",
+        "id": 4,
+        "projectId": 1,
+        "name": "项目投标书",
+        "kind": "DOC",
+        "size": 1231541
+      }
+  ],
+    "numPerPage": 0,
+    "currPageNum": 0,
+    "totalItemNum": 0,
+    "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="project__pid__file_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/project/{pid}</span>/file</h4></div><div class="modal-body"><div class="alert alert-info"><p>上传新附件。phase = [DRAFT]。role = [CUSTOMER]</p></div><ul class="nav nav-tabs"><li class="active"><a href="#project__pid__file_post_request" data-toggle="tab">Request</a></li><li><a href="#project__pid__file_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="project__pid__file_post_request"><h3>URI Parameters</h3><ul><li><strong>pid</strong>: <em>required (integer)</em><p>项目ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/form-data</strong></p><strong>Form Parameters</strong><ul><li><strong>file</strong>: <em>required (file)</em><p>仅支持JPG, PDF, DOC三种类型的文件</p></li></ul></div><div class="tab-pane" id="project__pid__file_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": 1,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_project__pid__file__fid_"><span class="parent">/project/{pid}/file</span>/{fid}</a> <span class="methods"><a href="#project__pid__file__fid__get"><span class="badge badge_get">get</span></a> <a href="#project__pid__file__fid__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_project__pid__file__fid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#project__pid__file__fid__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>下载附件。</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#project__pid__file__fid__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>删除附件。phase = [DRAFT]。role = [CUSTOMER]</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="project__pid__file__fid__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/project/{pid}/file</span>/{fid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>下载附件。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#project__pid__file__fid__get_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="project__pid__file__fid__get_request"><h3>URI Parameters</h3><ul><li><strong>pid</strong>: <em>required (integer)</em><p>项目ID</p></li><li><strong>fid</strong>: <em>required (integer)</em><p>项目附件的ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="project__pid__file__fid__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/project/{pid}/file</span>/{fid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>删除附件。phase = [DRAFT]。role = [CUSTOMER]</p></div><ul class="nav nav-tabs"><li class="active"><a href="#project__pid__file__fid__delete_request" data-toggle="tab">Request</a></li><li><a href="#project__pid__file__fid__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="project__pid__file__fid__delete_request"><h3>URI Parameters</h3><ul><li><strong>pid</strong>: <em>required (integer)</em><p>项目ID</p></li><li><strong>fid</strong>: <em>required (integer)</em><p>项目附件的ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="project__pid__file__fid__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_project__pid__submit"><span class="parent">/project/{pid}</span>/submit</a> <span class="methods"><a href="#project__pid__submit_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_project__pid__submit" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#project__pid__submit_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>提交项目进入海选阶段。phase = [DRAFT], role = [CUSTOMER]</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="project__pid__submit_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/project/{pid}</span>/submit</h4></div><div class="modal-body"><div class="alert alert-info"><p>提交项目进入海选阶段。phase = [DRAFT], role = [CUSTOMER]</p></div><ul class="nav nav-tabs"><li class="active"><a href="#project__pid__submit_post_request" data-toggle="tab">Request</a></li><li><a href="#project__pid__submit_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="project__pid__submit_post_request"><h3>URI Parameters</h3><ul><li><strong>pid</strong>: <em>required (integer)</em><p>项目ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="project__pid__submit_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_project__pid__phase__phase_"><span class="parent">/project/{pid}</span>/phase/{phase}</a> <span class="methods"><a href="#project__pid__phase__phase__post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_project__pid__phase__phase_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#project__pid__phase__phase__post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>更改项目所在的阶段。role = [MANAGER]</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="project__pid__phase__phase__post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/project/{pid}</span>/phase/{phase}</h4></div><div class="modal-body"><div class="alert alert-info"><p>更改项目所在的阶段。role = [MANAGER]</p></div><ul class="nav nav-tabs"><li class="active"><a href="#project__pid__phase__phase__post_request" data-toggle="tab">Request</a></li><li><a href="#project__pid__phase__phase__post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="project__pid__phase__phase__post_request"><h3>URI Parameters</h3><ul><li><strong>pid</strong>: <em>required (integer)</em><p>项目ID</p></li><li><strong>phase</strong>: <em>required (one of AUDITION, FIRST_REVIEW, FINAL_REVIEW, ACCEPTED)</em><p>项目下个阶段，且不能是DRAFT。</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/form-data</strong></p><strong>Form Parameters</strong><ul><li><strong>investType</strong>: <em>(one of SEED, ANGEL)</em><p>投资类型，当且仅当下个阶段为FINAL_REVIEW时才必须提供该参数</p></li></ul></div><div class="tab-pane" id="project__pid__phase__phase__post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_project__pid__status__status_"><span class="parent">/project/{pid}</span>/status/{status}</a> <span class="methods"><a href="#project__pid__status__status__post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_project__pid__status__status_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#project__pid__status__status__post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>更改项目当前状态。role = [MANAGER], phase = [AUDITION, FIRST_REVIEW, FINAL_REVIEW]</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="project__pid__status__status__post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/project/{pid}</span>/status/{status}</h4></div><div class="modal-body"><div class="alert alert-info"><p>更改项目当前状态。role = [MANAGER], phase = [AUDITION, FIRST_REVIEW, FINAL_REVIEW]</p></div><ul class="nav nav-tabs"><li class="active"><a href="#project__pid__status__status__post_request" data-toggle="tab">Request</a></li><li><a href="#project__pid__status__status__post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="project__pid__status__status__post_request"><h3>URI Parameters</h3><ul><li><strong>pid</strong>: <em>required (integer)</em><p>项目ID</p></li><li><strong>status</strong>: <em>required (one of NORMAL, WATCHING, RUBBISH)</em><p>项目的状态</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="project__pid__status__status__post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_project_search"><span class="parent">/project</span>/search</a> <span class="methods"><a href="#project_search_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_project_search" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#project_search_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>根据条件搜索项目。role = [MANAGER]</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="project_search_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/project</span>/search</h4></div><div class="modal-body"><div class="alert alert-info"><p>根据条件搜索项目。role = [MANAGER]</p></div><ul class="nav nav-tabs"><li class="active"><a href="#project_search_get_request" data-toggle="tab">Request</a></li><li><a href="#project_search_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="project_search_get_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Query Parameters</h3><ul><li><strong>phase</strong>: <em>(one of AUDITION, FIRST_REVIEW, FINAL_REVIEW, ACCEPTED)</em></li><li><strong>status</strong>: <em>(one of NORMAL, WATCHING, RUBBISH)</em></li><li><strong>city</strong>: <em>(string)</em><p>核心团队所在城市</p></li><li><strong>name</strong>: <em>(string)</em><p>项目名称或名称的关键词</p></li><li><strong>notified</strong>: <em>(boolean)</em><p><strong>Example</strong>:</p><pre><code>true or false</code></pre></li><li><strong>investType</strong>: <em>(one of SEED, ANGEL)</em></li><li><strong>pageSize</strong>: <em>(integer)</em><p>每页数量</p></li><li><strong>pageNumber</strong>: <em>(integer)</em><p>第几页</p></li></ul></div><div class="tab-pane" id="project_search_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": [
+    {
+      "@id": "1",
+      "id": 1,
+      "contactName": "李四",
+      "contactEmail": "lisi@gmail.com",
+      "contactMobile": "213512341234",
+      "name": "项目AA",
+      "startDate": 1422835200000,
+      "city": "Shanghai",
+      "type": "社交,教育",
+      "description": "一个很牛逼的项目！！！",
+      "phase": "DRAFT",
+      "status": "NORMAL",
+      "notified": false,
+      "investType": null
+    },
+    {
+      "@id": "2",
+      "id": 2,
+      "contactName": "张三",
+      "contactEmail": "zhangsan@gmail.com",
+      "contactMobile": "123456789123",
+      "name": "项目BB",
+      "startDate": 1422835200000,
+      "city": "北京",
+      "type": "社交,O2O",
+      "description": "另一个很牛逼的项目！！！",
+      "phase": "FIRST_REVIEW",
+      "status": "WATCHING",
+      "notified": true,
+      "investType": null
+    }
+  ],
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_project_notify"><span class="parent">/project</span>/notify</a> <span class="methods"><a href="#project_notify_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_project_notify" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#project_notify_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>批量将项目设置为“已通知”。role = [MANAGER]</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="project_notify_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/project</span>/notify</h4></div><div class="modal-body"><div class="alert alert-info"><p>批量将项目设置为“已通知”。role = [MANAGER]</p></div><ul class="nav nav-tabs"><li class="active"><a href="#project_notify_post_request" data-toggle="tab">Request</a></li><li><a href="#project_notify_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="project_notify_post_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/form-data</strong></p><strong>Form Parameters</strong><ul><li><strong>projectIds</strong>: <em>(string)</em><p>项目ID的列表，以逗号隔开</p><p><strong>Example</strong>:</p><pre>ID分别为1，2，3，4的四个项目列表可以写成：1,2,3,4</pre></li></ul></div><div class="tab-pane" id="project_notify_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="review" class="panel-title">/review</h3></div><div class="panel-body"><div class="top-resource-description"><p>每阶段评审的相关操作。</p></div><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_review"><span class="parent"></span>/review</a> <span class="methods"><a href="#review_get"><span class="badge badge_get">get</span></a> <a href="#review_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_review" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#review_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>列出项目的评审信息（仅支持海选、初审、终审）。</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#review_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>添加评审信息（支持海选、初审、终审、正式入选）。role = [MANAGER]</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="review_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/review</h4></div><div class="modal-body"><div class="alert alert-info"><p>列出项目的评审信息（仅支持海选、初审、终审）。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#review_get_request" data-toggle="tab">Request</a></li><li><a href="#review_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="review_get_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Query Parameters</h3><ul><li><strong>projectId</strong>: <em>required (integer)</em><p>项目ID</p></li><li><strong>phases</strong>: <em>required (one of AUDITION, FIRST_REVIEW, FINAL_REVIEW)</em><p>可选多个阶段，用逗号隔开</p></li></ul></div><div class="tab-pane" id="review_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": {
+    "AUDITION": [
+      {
+        "id": 1,
+        "phase": "AUDITION",
+        "createTime": 1439370598000,
+        "managerName": "M1",
+        "liked": true
+      }
+    ],
+    "FIRST_REVIEW": [
+      {
+        "id": 2,
+        "phase": "FIRST_REVIEW",
+        "createTime": 1439370727000,
+        "inclined": true,
+        "managerName": "M2",
+        "content": "一个不错的项目！"
+      }
+    ],
+    "FINAL_REVIEW": [
+      {
+        "id": 3,
+        "phase": "FINAL_REVIEW",
+        "createTime": 1439370830000,
+        "inclined": true,
+        "investAmount": "29w",
+        "managerName": "M2",
+        "content": "一个不错的项目！",
+        "invested": true,
+        "assessedValue": "10w"
+      }
+    ]
+  },
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="review_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/review</h4></div><div class="modal-body"><div class="alert alert-info"><p>添加评审信息（支持海选、初审、终审、正式入选）。role = [MANAGER]</p></div><ul class="nav nav-tabs"><li class="active"><a href="#review_post_request" data-toggle="tab">Request</a></li><li><a href="#review_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="review_post_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "projectId": "项目ID | integer | required",
+  "phase": "项目阶段 | one of AUDITION, FIRST_REVIEW, FINAL_REVIEW, ACCEPTED | required",
+  "liked": "点赞 | true/false | phase=AUDITION",
+  "managerName": "投资经理姓名/评估人姓名 | string | phase=FIRST_REVIEW/FINAL_REVIEW/ACCEPTED",
+  "content": "评价内容 | string | phase=FIRST_REVIEW/FINAL_REVIEW/ACCEPTED",
+  "inclined": "意向 | true/false | phase=FIRST_REVIEW/FINAL_REVIEW",
+  "assessedValue": "最多投资额 | string | phase=FINAL_REVIEW",
+  "investAmount": "最高估值 | string | phase=FINAL_REVIEW",
+  "invested": "是否领投资 | true/false | phase=FINAL_REVIEW"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>// 海选点赞的例子：
+{
+  "projectId": 4,
+  "phase": "AUDITION",
+  "liked": true
+}
+// 初审评审信息的例子：
+{
+  "projectId": 4,
+  "phase": "FIRST_REVIEW",
+  "managerName": "M2",
+  "content": "一个不错的项目！",
+  "inclined": true
+}
+// 终审评审信息的例子：
+{
+  "projectId": 4,
+  "phase": "FINAL_REVIEW",
+  "managerName": "M2",
+  "content": "一个不错的项目！",
+  "inclined": true,
+  "assessedValue": "10w",
+  "investAmount": "29w",
+  "invested": true
+}
+// 正式入选后的项目评估的例子：
+{
+  "projectId": 4,
+  "phase": "ACCEPTED",
+  "managerName": "M2",
+  "content": "一个不错的项目！"
+}
+</code></pre></div><div class="tab-pane" id="review_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": 1,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_review__rid_"><span class="parent">/review</span>/{rid}</a> <span class="methods"><a href="#review__rid__put"><span class="badge badge_put">put</span></a></span></h4></div><div id="panel_review__rid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#review__rid__put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>更新评审信息。role = [MANAGER]</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="review__rid__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/review</span>/{rid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>更新评审信息。role = [MANAGER]</p></div><ul class="nav nav-tabs"><li class="active"><a href="#review__rid__put_request" data-toggle="tab">Request</a></li><li><a href="#review__rid__put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="review__rid__put_request"><h3>URI Parameters</h3><ul><li><strong>rid</strong>: <em>required (integer)</em><p>评审ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "liked": "点赞 | true/false | phase=AUDITION",
+  "managerName": "投资经理姓名/评估人姓名 | string | phase=FIRST_REVIEW/FINAL_REVIEW/ACCEPTED",
+  "content": "评价内容 | string | phase=FIRST_REVIEW/FINAL_REVIEW/ACCEPTED",
+  "inclined": "意向 | true/false | phase=FIRST_REVIEW/FINAL_REVIEW",
+  "assessedValue": "最多投资额 | string | phase=FINAL_REVIEW",
+  "investAmount": "最高估值 | string | phase=FINAL_REVIEW",
+  "invested": "是否领投资 | true/false | phase=FINAL_REVIEW"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>海选点赞：
+{
+  "liked": true
+}
+初审评审信息：
+{
+  "managerName": "M2",
+  "content": "一个不错的项目！",
+  "inclined": true
+}
+终审评审信息：
+{
+  "managerName": "M2",
+  "content": "一个不错的项目！",
+  "inclined": true,
+  "assessedValue": "10w",
+  "investAmount": "29w",
+  "invested": true
+}
+正式入选后的项目评估：
+{
+  "managerName": "M2",
+  "content": "一个不错的项目！"
+}
+</code></pre></div><div class="tab-pane" id="review__rid__put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_review_evaluate"><span class="parent">/review</span>/evaluate</a> <span class="methods"><a href="#review_evaluate_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_review_evaluate" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#review_evaluate_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>列出正式项目的评估信息。role = [MANAGER]</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="review_evaluate_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/review</span>/evaluate</h4></div><div class="modal-body"><div class="alert alert-info"><p>列出正式项目的评估信息。role = [MANAGER]</p></div><ul class="nav nav-tabs"><li class="active"><a href="#review_evaluate_get_request" data-toggle="tab">Request</a></li><li><a href="#review_evaluate_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="review_evaluate_get_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Query Parameters</h3><ul><li><strong>projectId</strong>: <em>required (integer)</em><p>项目ID</p></li></ul></div><div class="tab-pane" id="review_evaluate_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": {
+    "ACCEPTED": [
+      {
+        "phase": "ACCEPTED",
+        "createTime": 1439370598000,
+        "managerName": "M1",
+        "content": "一个不错的项目"
+      }
+    ]
+  },
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="company" class="panel-title">/company</h3></div><div class="panel-body"><div class="top-resource-description"><p>正式项目中公司信息的相关操作。phase = [ACCEPTED]</p></div><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_company"><span class="parent"></span>/company</a> <span class="methods"><a href="#company_get"><span class="badge badge_get">get</span></a> <a href="#company_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_company" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#company_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>读取项目对应的公司信息。</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#company_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>添加项目对应的公司信息。每个项目对应唯一的公司信息，所以同一个项目不能添加多个公司记录。</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="company_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/company</h4></div><div class="modal-body"><div class="alert alert-info"><p>读取项目对应的公司信息。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#company_get_request" data-toggle="tab">Request</a></li><li><a href="#company_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="company_get_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Query Parameters</h3><ul><li><strong>projectId</strong>: <em>required (integer)</em><p>项目ID</p></li></ul></div><div class="tab-pane" id="company_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": {
+    "@id": "1",
+    "id": 3,
+    "projectId": 6,
+    "name": "Google",
+    "registerType": "NATIONAL",
+    "registerAddress": "aaaaa",
+    "registerTime": 1438387200000,
+    "registerCapital": "10w",
+    "legalPerson": "Mr X",
+    "legalMobile": "12314124124",
+    "legalEmail": "awfd@asdf",
+    "officeAddress": "wefjawlefj"
+  },
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="company_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/company</h4></div><div class="modal-body"><div class="alert alert-info"><p>添加项目对应的公司信息。每个项目对应唯一的公司信息，所以同一个项目不能添加多个公司记录。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#company_post_request" data-toggle="tab">Request</a></li><li><a href="#company_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="company_post_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "projectId": "项目ID | integer | required",
+  "name": "公司名称 | string | optional",
+  "registerType": "公司注册类型 | one of NATIONAL, SINO_FOREIGN, OTHER | optional",
+  "registerAddress": "注册地址 | string | optional",
+  "registerTime": "注册时间 | date | optional",
+  "registerCapital": "注册资本 | string | optional",
+  "legalPerson": "法定代表人 | string | optional",
+  "legalMobile": "法定代表人手机号码 | string | optional",
+  "legalEmail": "法定代表人电子邮箱 | string | optional",
+  "officeAddress": "办公地址 | string | optional"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "projectId": 6,
+  "name": "Google",
+  "registerType": "NATIONAL",
+  "registerAddress": "aaaaa",
+  "registerTime": "2015-8-1",
+  "registerCapital": "10w",
+  "legalPerson": "Mr X",
+  "legalMobile": "12314124124",
+  "legalEmail": "awfd@asdf",
+  "officeAddress": "wefjawlefj"
+}
+</code></pre></div><div class="tab-pane" id="company_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": 1,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_company__cid_"><span class="parent">/company</span>/{cid}</a> <span class="methods"><a href="#company__cid__put"><span class="badge badge_put">put</span></a></span></h4></div><div id="panel_company__cid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#company__cid__put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>更新公司信息。</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="company__cid__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/company</span>/{cid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>更新公司信息。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#company__cid__put_request" data-toggle="tab">Request</a></li><li><a href="#company__cid__put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="company__cid__put_request"><h3>URI Parameters</h3><ul><li><strong>cid</strong>: <em>required (integer)</em><p>公司ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "name": "公司名称 | string | optional",
+  "registerType": "公司注册类型 | one of NATIONAL, SINO_FOREIGN, OTHER | optional",
+  "registerAddress": "注册地址 | string | optional",
+  "registerTime": "注册时间 | date | optional",
+  "registerCapital": "注册资本 | string | optional",
+  "legalPerson": "法定代表人 | string | optional",
+  "legalMobile": "法定代表人手机号码 | string | optional",
+  "legalEmail": "法定代表人电子邮箱 | string | optional",
+  "officeAddress": "办公地址 | string | optional"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "name": "Google",
+  "registerType": "NATIONAL",
+  "registerAddress": "aaaaa",
+  "registerTime": "2015-8-1",
+  "registerCapital": "10w",
+  "legalPerson": "Mr X",
+  "legalMobile": "12314124124",
+  "legalEmail": "awfd@asdf",
+  "officeAddress": "wefjawlefj"
+}
+</code></pre></div><div class="tab-pane" id="company__cid__put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": 1,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="equity" class="panel-title">/equity</h3></div><div class="panel-body"><div class="top-resource-description"><p>正式项目中股权变更信息的相关操作。phase = [ACCEPTED]</p></div><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_equity"><span class="parent"></span>/equity</a> <span class="methods"><a href="#equity_get"><span class="badge badge_get">get</span></a> <a href="#equity_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_equity" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#equity_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>列出正式项目的股权变更信息。</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#equity_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>添加股权信息。</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="equity_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/equity</h4></div><div class="modal-body"><div class="alert alert-info"><p>列出正式项目的股权变更信息。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#equity_get_request" data-toggle="tab">Request</a></li><li><a href="#equity_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="equity_get_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Query Parameters</h3><ul><li><strong>projectId</strong>: <em>required (integer)</em><p>项目ID</p></li></ul></div><div class="tab-pane" id="equity_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": [
+    {
+      "@id": "1",
+      "id": 1,
+      "projectId": 3,
+      "investor": "MR ABC",
+      "investTime": 1430438400000,
+      "investType": "ORIGINAL",
+      "investCurrency": "USD",
+      "investAmount": "20w",
+      "estimateAmount": "20w",
+      "sharePercentage": "4%",
+      "board": "Google"
+    }
+  ],
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="equity_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/equity</h4></div><div class="modal-body"><div class="alert alert-info"><p>添加股权信息。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#equity_post_request" data-toggle="tab">Request</a></li><li><a href="#equity_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="equity_post_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "projectId": "项目ID | integer | required",
+  "investor": "投资人/投资机构 | integer | optional",
+  "investTime": "注册时间 | date | optional",
+  "investType": "投资类型 | one of ORIGINAL, ADDITIONAL, TRANSFER | optional",
+  "investCurrency": "投资币种 | one of RMB, USD | optional",
+  "investAmount": "投资金额 | string | optional",
+  "estimateAmount": "投后估值 | string | optional",
+  "sharePercentage": "占股比例 | string | optional",
+  "board": "董事会相关 | string | optional"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "projectId": "3",
+  "investor": "MR ABC",
+  "investTime": "2014-1-1",
+  "investType": "ORIGINAL",
+  "investCurrency": "RMB",
+  "investAmount": "20w",
+  "estimateAmount": "20w",
+  "sharePercentage": "4%",
+  "board": "Google"
+}
+</code></pre></div><div class="tab-pane" id="equity_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": 1,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_equity__eid_"><span class="parent">/equity</span>/{eid}</a> <span class="methods"><a href="#equity__eid__put"><span class="badge badge_put">put</span></a> <a href="#equity__eid__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_equity__eid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#equity__eid__put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>编辑股权信息。phase = [ACCEPTED]</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#equity__eid__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>删除股权信息，同时删除关联的附件信息。</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="equity__eid__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/equity</span>/{eid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>编辑股权信息。phase = [ACCEPTED]</p></div><ul class="nav nav-tabs"><li class="active"><a href="#equity__eid__put_request" data-toggle="tab">Request</a></li><li><a href="#equity__eid__put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="equity__eid__put_request"><h3>URI Parameters</h3><ul><li><strong>eid</strong>: <em>required (integer)</em><p>股权ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "investor": "投资人/投资机构 | integer | optional",
+  "investTime": "注册时间 | date | optional",
+  "investType": "投资类型 | one of ORIGINAL, ADDITIONAL, TRANSFER | optional",
+  "investCurrency": "投资币种 | one of RMB, USD | optional",
+  "investAmount": "投资金额 | string | optional",
+  "estimateAmount": "投后估值 | string | optional",
+  "sharePercentage": "占股比例 | string | optional",
+  "board": "董事会相关 | string | optional"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "projectId": "3",
+  "investor": "MR ABC",
+  "investTime": "2014-1-1",
+  "investType": "ORIGINAL",
+  "investCurrency": "RMB",
+  "investAmount": "20w",
+  "estimateAmount": "20w",
+  "sharePercentage": "4%",
+  "board": "Google"
+}
+</code></pre></div><div class="tab-pane" id="equity__eid__put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="equity__eid__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/equity</span>/{eid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>删除股权信息，同时删除关联的附件信息。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#equity__eid__delete_request" data-toggle="tab">Request</a></li><li><a href="#equity__eid__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="equity__eid__delete_request"><h3>URI Parameters</h3><ul><li><strong>eid</strong>: <em>required (integer)</em><p>股权ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="equity__eid__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_equity__eid__file"><span class="parent">/equity/{eid}</span>/file</a> <span class="methods"><a href="#equity__eid__file_get"><span class="badge badge_get">get</span></a> <a href="#equity__eid__file_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_equity__eid__file" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#equity__eid__file_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>列出股权的附件信息。</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#equity__eid__file_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>上传股权的新附件，每种类型的附件仅保存一份，所以对于相同类型的附件来说，新附件会覆盖旧的附件。</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="equity__eid__file_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/equity/{eid}</span>/file</h4></div><div class="modal-body"><div class="alert alert-info"><p>列出股权的附件信息。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#equity__eid__file_get_request" data-toggle="tab">Request</a></li><li><a href="#equity__eid__file_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="equity__eid__file_get_request"><h3>URI Parameters</h3><ul><li><strong>eid</strong>: <em>required (integer)</em><p>股权ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="equity__eid__file_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": [
+    {
+      "@id": "1",
+      "id": 4,
+      "equityId": 1,
+      "type": "BIZ_LICENSE",
+      "name": "travel",
+      "kind": "PDF",
+      "size": 4080
+    }
+  ],
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="equity__eid__file_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/equity/{eid}</span>/file</h4></div><div class="modal-body"><div class="alert alert-info"><p>上传股权的新附件，每种类型的附件仅保存一份，所以对于相同类型的附件来说，新附件会覆盖旧的附件。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#equity__eid__file_post_request" data-toggle="tab">Request</a></li><li><a href="#equity__eid__file_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="equity__eid__file_post_request"><h3>URI Parameters</h3><ul><li><strong>eid</strong>: <em>required (integer)</em><p>股权ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/form-data</strong></p><strong>Form Parameters</strong><ul><li><strong>type</strong>: <em>required (one of BIZ_LICENSE, ORG_CODE_CERT, TAX_REG_CERT, CORP_ARTICLE, SHAREHOLDER_RESOLUTE, INVEST_AGREE, AUDIT_REPORT)</em><p>附件类型</p></li><li><strong>file</strong>: <em>required (file)</em><p>要上传的文件</p></li></ul></div><div class="tab-pane" id="equity__eid__file_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": 1,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_equity__eid__file__fid_"><span class="parent">/equity/{eid}/file</span>/{fid}</a> <span class="methods"><a href="#equity__eid__file__fid__get"><span class="badge badge_get">get</span></a> <a href="#equity__eid__file__fid__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_equity__eid__file__fid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#equity__eid__file__fid__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>下载附件</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#equity__eid__file__fid__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>删除附件</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="equity__eid__file__fid__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/equity/{eid}/file</span>/{fid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>下载附件</p></div><ul class="nav nav-tabs"><li class="active"><a href="#equity__eid__file__fid__get_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="equity__eid__file__fid__get_request"><h3>URI Parameters</h3><ul><li><strong>eid</strong>: <em>required (integer)</em><p>股权ID</p></li><li><strong>fid</strong>: <em>required (integer)</em><p>股权附件的ID</p></li></ul></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="equity__eid__file__fid__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/equity/{eid}/file</span>/{fid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>删除附件</p></div><ul class="nav nav-tabs"><li class="active"><a href="#equity__eid__file__fid__delete_request" data-toggle="tab">Request</a></li><li><a href="#equity__eid__file__fid__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="equity__eid__file__fid__delete_request"><h3>URI Parameters</h3><ul><li><strong>eid</strong>: <em>required (integer)</em><p>股权ID</p></li><li><strong>fid</strong>: <em>required (integer)</em><p>股权附件的ID</p></li></ul></div><div class="tab-pane" id="equity__eid__file__fid__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="founder" class="panel-title">/founder</h3></div><div class="panel-body"><div class="top-resource-description"><p>正式项目中创始人信息的相关操作。phase = [ACCEPTED]</p></div><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_founder"><span class="parent"></span>/founder</a> <span class="methods"><a href="#founder_get"><span class="badge badge_get">get</span></a> <a href="#founder_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_founder" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#founder_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>列出项目的创始人信息。</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#founder_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>添加创始人</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="founder_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/founder</h4></div><div class="modal-body"><div class="alert alert-info"><p>列出项目的创始人信息。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#founder_get_request" data-toggle="tab">Request</a></li><li><a href="#founder_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="founder_get_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Query Parameters</h3><ul><li><strong>projectId</strong>: <em>required (integer)</em><p>项目ID</p></li></ul></div><div class="tab-pane" id="founder_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": [
+    {
+      "@id": "1",
+      "id": 3,
+      "projectId": 3,
+      "name": "Mr Y",
+      "mobile": "123412521521",
+      "wechat": "mry",
+      "email": "abc@xyz",
+      "idNumber": "12312412412521412412412",
+      "position": "CEO"
+    }
+  ],
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="founder_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/founder</h4></div><div class="modal-body"><div class="alert alert-info"><p>添加创始人</p></div><ul class="nav nav-tabs"><li class="active"><a href="#founder_post_request" data-toggle="tab">Request</a></li><li><a href="#founder_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="founder_post_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "projectId": "项目ID | integer | required",
+  "name": "创始人姓名 | string | optional",
+  "mobile": "手机号 | string | optional",
+  "wechat": "微信号 | string | optional",
+  "email": "电子邮箱 | string | optional",
+  "idNumber": "身份证/护照号码 | string | optional",
+  "position": "目前职位 | string | optional"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "projectId": "3",
+  "name": "Mr Y",
+  "mobile": "123412521521",
+  "wechat": "mry",
+  "email": "abc@xyz",
+  "idNumber": "12312412412521412412412",
+  "position": "CEO"
+}
+</code></pre></div><div class="tab-pane" id="founder_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": 1,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_founder__fid_"><span class="parent">/founder</span>/{fid}</a> <span class="methods"><a href="#founder__fid__get"><span class="badge badge_get">get</span></a> <a href="#founder__fid__put"><span class="badge badge_put">put</span></a> <a href="#founder__fid__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_founder__fid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#founder__fid__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>读取创始人信息。</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#founder__fid__put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>更新创始人信息</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#founder__fid__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>删除创始人信息，同时删除关联的工作和教育信息。</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="founder__fid__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/founder</span>/{fid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>读取创始人信息。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#founder__fid__get_request" data-toggle="tab">Request</a></li><li><a href="#founder__fid__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="founder__fid__get_request"><h3>URI Parameters</h3><ul><li><strong>fid</strong>: <em>required (integer)</em><p>创始人ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="founder__fid__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": {
+    "@id": "1",
+    "id": 3,
+    "projectId": 3,
+    "name": "Mr Y",
+    "mobile": "123412521521",
+    "wechat": "mry",
+    "email": "abc@xyz",
+    "idNumber": "12312412412521412412412",
+    "position": "CEO"
+  },
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="founder__fid__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/founder</span>/{fid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>更新创始人信息</p></div><ul class="nav nav-tabs"><li class="active"><a href="#founder__fid__put_request" data-toggle="tab">Request</a></li><li><a href="#founder__fid__put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="founder__fid__put_request"><h3>URI Parameters</h3><ul><li><strong>fid</strong>: <em>required (integer)</em><p>创始人ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "name": "创始人姓名 | string | optional",
+  "mobile": "手机号 | string | optional",
+  "wechat": "微信号 | string | optional",
+  "email": "电子邮箱 | string | optional",
+  "idNumber": "身份证/护照号码 | string | optional",
+  "position": "目前职位 | string | optional"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "name": "Mr Y",
+  "mobile": "123412521521",
+  "wechat": "mry",
+  "email": "abc@xyz",
+  "idNumber": "12312412412521412412412",
+  "position": "CEO"
+}
+</code></pre></div><div class="tab-pane" id="founder__fid__put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="founder__fid__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/founder</span>/{fid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>删除创始人信息，同时删除关联的工作和教育信息。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#founder__fid__delete_request" data-toggle="tab">Request</a></li><li><a href="#founder__fid__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="founder__fid__delete_request"><h3>URI Parameters</h3><ul><li><strong>fid</strong>: <em>required (integer)</em><p>创始人ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="founder__fid__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_founder__fid__work"><span class="parent">/founder/{fid}</span>/work</a> <span class="methods"><a href="#founder__fid__work_get"><span class="badge badge_get">get</span></a> <a href="#founder__fid__work_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_founder__fid__work" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#founder__fid__work_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>列出该创始人的工作信息。</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#founder__fid__work_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>添加工作经历。</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="founder__fid__work_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/founder/{fid}</span>/work</h4></div><div class="modal-body"><div class="alert alert-info"><p>列出该创始人的工作信息。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#founder__fid__work_get_request" data-toggle="tab">Request</a></li><li><a href="#founder__fid__work_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="founder__fid__work_get_request"><h3>URI Parameters</h3><ul><li><strong>fid</strong>: <em>required (integer)</em><p>创始人ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="founder__fid__work_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": [
+    {
+      "@id": "1",
+      "id": 1,
+      "founderId": 1,
+      "company": "Google",
+      "position": "CFO",
+      "startDate": "2013-1-1",
+      "endDate": "至今"
+    }
+  ],
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="founder__fid__work_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/founder/{fid}</span>/work</h4></div><div class="modal-body"><div class="alert alert-info"><p>添加工作经历。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#founder__fid__work_post_request" data-toggle="tab">Request</a></li><li><a href="#founder__fid__work_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="founder__fid__work_post_request"><h3>URI Parameters</h3><ul><li><strong>fid</strong>: <em>required (integer)</em><p>创始人ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "company": "工作单位 | string | optional",
+  "position": "职位 | string | optional",
+  "startDate": "开始时间 | string | optional",
+  "endDate": "结束时间 | string | optional"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "company": "Baidu",
+  "position": "CEO",
+  "startDate": "2015-1-1",
+  "endDate": "至今"
+}
+</code></pre></div><div class="tab-pane" id="founder__fid__work_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": 1,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_founder__fid__work__wid_"><span class="parent">/founder/{fid}/work</span>/{wid}</a> <span class="methods"><a href="#founder__fid__work__wid__put"><span class="badge badge_put">put</span></a> <a href="#founder__fid__work__wid__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_founder__fid__work__wid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#founder__fid__work__wid__put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>更新工作经历。</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#founder__fid__work__wid__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>删除工作经历。</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="founder__fid__work__wid__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/founder/{fid}/work</span>/{wid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>更新工作经历。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#founder__fid__work__wid__put_request" data-toggle="tab">Request</a></li><li><a href="#founder__fid__work__wid__put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="founder__fid__work__wid__put_request"><h3>URI Parameters</h3><ul><li><strong>fid</strong>: <em>required (integer)</em><p>创始人ID</p></li><li><strong>wid</strong>: <em>required (integer)</em><p>工作ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "company": "工作单位 | string | optional",
+  "position": "职位 | string | optional",
+  "startDate": "开始时间 | string | optional",
+  "endDate": "结束时间 | string | optional"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "company": "Baidu",
+  "position": "CEO",
+  "startDate": "2015-1-1",
+  "endDate": "至今"
+}
+</code></pre></div><div class="tab-pane" id="founder__fid__work__wid__put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="founder__fid__work__wid__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/founder/{fid}/work</span>/{wid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>删除工作经历。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#founder__fid__work__wid__delete_request" data-toggle="tab">Request</a></li><li><a href="#founder__fid__work__wid__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="founder__fid__work__wid__delete_request"><h3>URI Parameters</h3><ul><li><strong>fid</strong>: <em>required (integer)</em><p>创始人ID</p></li><li><strong>wid</strong>: <em>required (integer)</em><p>工作ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="founder__fid__work__wid__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_founder__fid__edu"><span class="parent">/founder/{fid}</span>/edu</a> <span class="methods"><a href="#founder__fid__edu_get"><span class="badge badge_get">get</span></a> <a href="#founder__fid__edu_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_founder__fid__edu" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#founder__fid__edu_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>列出该创始人的教育信息。</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#founder__fid__edu_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>添加教育信息。</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="founder__fid__edu_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/founder/{fid}</span>/edu</h4></div><div class="modal-body"><div class="alert alert-info"><p>列出该创始人的教育信息。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#founder__fid__edu_get_request" data-toggle="tab">Request</a></li><li><a href="#founder__fid__edu_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="founder__fid__edu_get_request"><h3>URI Parameters</h3><ul><li><strong>fid</strong>: <em>required (integer)</em><p>创始人ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="founder__fid__edu_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": [
+    {
+      "@id": "1",
+      "id": 1,
+      "founderId": 1,
+      "college": "Tongji",
+      "major": "CS",
+      "startDate": "2013-1-1",
+      "endDate": "至今"
+    }
+  ],
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="founder__fid__edu_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/founder/{fid}</span>/edu</h4></div><div class="modal-body"><div class="alert alert-info"><p>添加教育信息。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#founder__fid__edu_post_request" data-toggle="tab">Request</a></li><li><a href="#founder__fid__edu_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="founder__fid__edu_post_request"><h3>URI Parameters</h3><ul><li><strong>fid</strong>: <em>required (integer)</em><p>创始人ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "college": "毕业院系 | string | optional",
+  "major": "专业 | string | optional",
+  "startDate": "开始时间 | string | optional",
+  "endDate": "结束时间 | string | optional"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "college": "Tongji",
+  "major": "CS",
+  "startDate": "2015-1-1",
+  "endDate": "至今"
+}
+</code></pre></div><div class="tab-pane" id="founder__fid__edu_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": 1,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_founder__fid__edu__eid_"><span class="parent">/founder/{fid}/edu</span>/{eid}</a> <span class="methods"><a href="#founder__fid__edu__eid__put"><span class="badge badge_put">put</span></a> <a href="#founder__fid__edu__eid__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_founder__fid__edu__eid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#founder__fid__edu__eid__put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>更新教育经历。</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#founder__fid__edu__eid__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>删除教育经历。</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="founder__fid__edu__eid__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/founder/{fid}/edu</span>/{eid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>更新教育经历。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#founder__fid__edu__eid__put_request" data-toggle="tab">Request</a></li><li><a href="#founder__fid__edu__eid__put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="founder__fid__edu__eid__put_request"><h3>URI Parameters</h3><ul><li><strong>fid</strong>: <em>required (integer)</em><p>创始人ID</p></li><li><strong>eid</strong>: <em>required (integer)</em><p>教育ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "college": "毕业院系 | string | optional",
+  "major": "专业 | string | optional",
+  "startDate": "开始时间 | string | optional",
+  "endDate": "结束时间 | string | optional"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "college": "Tongji",
+  "major": "CS",
+  "startDate": "2015-1-1",
+  "endDate": "至今"
+}
+</code></pre></div><div class="tab-pane" id="founder__fid__edu__eid__put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="founder__fid__edu__eid__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/founder/{fid}/edu</span>/{eid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>删除教育经历。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#founder__fid__edu__eid__delete_request" data-toggle="tab">Request</a></li><li><a href="#founder__fid__edu__eid__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="founder__fid__edu__eid__delete_request"><h3>URI Parameters</h3><ul><li><strong>fid</strong>: <em>required (integer)</em><p>创始人ID</p></li><li><strong>eid</strong>: <em>required (integer)</em><p>教育ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="founder__fid__edu__eid__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="progress" class="panel-title">/progress</h3></div><div class="panel-body"><div class="top-resource-description"><p>正式项目中项目进展的相关操作。phase = [ACCEPTED]</p></div><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_progress"><span class="parent"></span>/progress</a> <span class="methods"><a href="#progress_get"><span class="badge badge_get">get</span></a> <a href="#progress_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_progress" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#progress_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>列出正式项目的进展。</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#progress_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>添加项目进展。</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="progress_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/progress</h4></div><div class="modal-body"><div class="alert alert-info"><p>列出正式项目的进展。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#progress_get_request" data-toggle="tab">Request</a></li><li><a href="#progress_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="progress_get_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="progress_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": [
+    {
+      "@id": "1",
+      "id": 1,
+      "projectId": 3,
+      "eventType": "VERSION_UPDATE",
+      "description": "AAAA BBBB CCCC"
+    }
+  ],
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="progress_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/progress</h4></div><div class="modal-body"><div class="alert alert-info"><p>添加项目进展。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#progress_post_request" data-toggle="tab">Request</a></li><li><a href="#progress_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="progress_post_request"><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "projectId": "项目编号 | integer | required",
+  "eventType": "事件类别 | one of VERSION_UPDATE, USER_PROMOTE, MEDIA_COVERAGE, FINANCE_NEGOTIATE, BUSINESS_COOPERATE, CONTEST_AWARD | optional",
+  "description": "事件描述 | string | optional"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "projectId": 3,
+  "eventType": "VERSION_UPDATE",
+  "description": "afwefjlaf l23j flk23jfl k2j3lf"
+}
+</code></pre></div><div class="tab-pane" id="progress_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": 1,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_progress__pid_"><span class="parent">/progress</span>/{pid}</a> <span class="methods"><a href="#progress__pid__put"><span class="badge badge_put">put</span></a> <a href="#progress__pid__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_progress__pid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#progress__pid__put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>更新进展。</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#progress__pid__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>删除进展。</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="progress__pid__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/progress</span>/{pid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>更新进展。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#progress__pid__put_request" data-toggle="tab">Request</a></li><li><a href="#progress__pid__put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="progress__pid__put_request"><h3>URI Parameters</h3><ul><li><strong>pid</strong>: <em>required (integer)</em><p>进展ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "eventType": "事件类别 | one of VERSION_UPDATE, USER_PROMOTE, MEDIA_COVERAGE, FINANCE_NEGOTIATE, BUSINESS_COOPERATE, CONTEST_AWARD | optional",
+  "description": "事件描述 | string | optional"
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "eventType": "VERSION_UPDATE",
+  "description": "afwefjlaf l23j flk23jfl k2j3lf"
+}
+</code></pre></div><div class="tab-pane" id="progress__pid__put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="progress__pid__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/progress</span>/{pid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>删除进展。</p></div><ul class="nav nav-tabs"><li class="active"><a href="#progress__pid__delete_request" data-toggle="tab">Request</a></li><li><a href="#progress__pid__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="progress__pid__delete_request"><h3>URI Parameters</h3><ul><li><strong>pid</strong>: <em>required (integer)</em><p>进展ID</p></li></ul><h3>Headers</h3><ul><li><strong>X-Auth-Token</strong>: <em>required (string)</em><p>当前用户token，用于验证权限,从登录返回的header中获取</p><p><strong>Example</strong>:</p><pre>IOC551fea47e4b02dd0ab568b85</pre></li></ul></div><div class="tab-pane" id="progress__pid__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "code": "200",
+  "message": "",
+  "messageDetail": null,
+  "data": true,
+  "numPerPage": 0,
+  "currPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#token">/token</a></li><li><a href="#account">/account</a></li><li><a href="#project">/project</a></li><li><a href="#review">/review</a></li><li><a href="#company">/company</a></li><li><a href="#equity">/equity</a></li><li><a href="#founder">/founder</a></li><li><a href="#progress">/progress</a></li></ul></div></div></div></div></body></html>
